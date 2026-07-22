@@ -65,6 +65,25 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
 - Rendszeres mentés + visszaállítási terv.
 - GDPR: munkatársi személyes/béradat kezelése → adatkezelési szabályzatba felvenni.
 
+## Külső (publikus) oldal — sokkal egyszerűbb, statikus is lehet
+
+- **Bemutatkozó oldal** + **megközelítés** (térkép, tömegközlekedés). Mellé:
+  Google Business Profile — a legtöbben a Térképen keresnek majd.
+- **Egy eseménynaptár** kategória-szűrővel (koncert / buli / kultúra) és
+  heti/havi nézetváltóval — NEM hat külön aloldal. Eseménykártyánként
+  jegyvásárlás gomb (Cooltix beágyazható saját felületre). Ugyanaz az
+  esemény-gerinc, mint a belső rendszerben: egyszer felvitt program.
+- **Hírek = hero-szekció**: a következő 2 kiemelt esemény (fesztivál /
+  daytime buli) promózva a főoldal tetején.
+- **Teremfoglalás** (rendezvényterem, zenekari próbaterem, kisterem,
+  szülinap): induláskor beágyazott kész foglaló. Calendly ingyenes szintje
+  csak 1 eseménytípus → több teremhez fizetős, vagy alternatíva: Cal.com
+  (nyílt forráskódú, bőkezűbb ingyen). KRITIKUS: a foglalónaptár szinkronban
+  legyen a rendezvényekkel (koncert estéjére ne lehessen termet bérelni)!
+  Később: saját foglaló a belső naptárra kötve.
+- Technika: statikus oldal (a radar/belso-teszt receptje) + beágyazások;
+  az eseményadat JSON-ból, amit később a belső rendszer szerkeszt.
+
 ## Ovis jel
 
 - **Opt-in dísz, nem kötelező és NEM hitelesítési elem.** Aki szeretné, választ
