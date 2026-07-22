@@ -114,8 +114,8 @@
     border-radius: 12px; background: var(--card);
   }
 
-  /* ---- heti meeting szervező ---- */
-  #meetingnezet { display: none; }
+  /* ---- heti meeting szervező + saját meetingek ---- */
+  #meetingnezet, #sajatnezet { display: none; }
   .ecsetek { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
   .ecsetek .cimke { color: var(--mut); font-size: 13px; }
   .ecset {
@@ -199,9 +199,12 @@
       <p>A pályázatradar itt, beágyazva — kattints a megnyitáshoz.</p></button>
     <div class="doboz"><h2>💬 Faliújság</h2>
       <p>Belső hírek, teendők, ki mit vállalt.</p></div>
-    <button class="doboz" id="meeting" type="button" style="grid-column: 1 / -1;">
+    <button class="doboz" id="meeting" type="button" style="grid-column: span 2;">
       <h2>🗓️ Heti meeting szervező</h2>
       <p>Jelöld be, mikor érsz rá ezen és a jövő héten (H–P, 10:00–20:00) — kattints a megnyitáshoz.</p></button>
+    <button class="doboz" id="sajatmeeting" type="button" style="grid-column: span 2;">
+      <h2>📌 Heti meetingjeim</h2>
+      <p>A következő két hét lefixált meeting-időpontjai — kattints a listához.</p></button>
   </div>
 
   <div id="doknezet">
@@ -223,6 +226,15 @@
         <a class="dokword" href="dokumentumok/40dryszoveg.docx" download>Word ⬇</a>
       </li>
     </ul>
+  </div>
+
+  <div id="sajatnezet">
+    <div class="fejlec">
+      <button id="sajatvissza" type="button">← Vissza</button>
+      <h2>📌 Heti meetingjeim</h2>
+      <span style="color:var(--mut);font-size:13px;">a következő két hét</span>
+    </div>
+    <ul class="doklista" id="meetinglista"></ul>
   </div>
 
   <div id="meetingnezet">
@@ -490,6 +502,45 @@
     document.getElementById("racs").style.display = "grid";
   });
 
+  // ---- Heti meetingjeim: lefixált időpontok (egyelőre minta-adat) ----
+  // Új meeting felvétele: bővítsd ezt a listát {datum, ido, cim, hely} elemekkel.
+  var MEETINGEK = [
+    { datum: "2026-04-13", ido: "18:00–19:00",
+      cim: "Heti közösségi meeting (minta)", hely: "nagyterem", minta: true }
+  ];
+  var NAPNEVEK = ["vasárnap", "hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat"];
+
+  document.getElementById("sajatmeeting").addEventListener("click", function () {
+    var lista = document.getElementById("meetinglista");
+    lista.innerHTML = "";
+    if (!MEETINGEK.length) {
+      var ures = document.createElement("li");
+      ures.innerHTML = "<p>Nincs lefixált meeting a következő két hétben.</p>";
+      lista.appendChild(ures);
+    }
+    MEETINGEK.slice().sort(function (a, b) {
+      return a.datum < b.datum ? -1 : 1;
+    }).forEach(function (m) {
+      var d = new Date(m.datum + "T12:00:00");
+      var li = document.createElement("li");
+      var cim = document.createElement("span");
+      cim.className = "dokcim";
+      cim.textContent = m.cim;
+      var resz = document.createElement("p");
+      resz.textContent = d.getFullYear() + ". " + String(d.getMonth() + 1).padStart(2, "0") +
+        ". " + String(d.getDate()).padStart(2, "0") + ". (" + NAPNEVEK[d.getDay()] + ") · " +
+        m.ido + (m.hely ? " · " + m.hely : "") + (m.minta ? " · 🏷️ minta-adat" : "");
+      li.appendChild(cim); li.appendChild(resz);
+      lista.appendChild(li);
+    });
+    document.getElementById("racs").style.display = "none";
+    document.getElementById("sajatnezet").style.display = "block";
+  });
+  document.getElementById("sajatvissza").addEventListener("click", function () {
+    document.getElementById("sajatnezet").style.display = "none";
+    document.getElementById("racs").style.display = "grid";
+  });
+
   document.getElementById("kilep").addEventListener("click", function () {
     bejelentkezve = null;
     valasztottJel = null;
@@ -500,6 +551,7 @@
     document.getElementById("radarnezet").style.display = "none";
     document.getElementById("doknezet").style.display = "none";
     document.getElementById("meetingnezet").style.display = "none";
+    document.getElementById("sajatnezet").style.display = "none";
     document.getElementById("racs").style.display = "grid";
     document.getElementById("kapu").style.display = "flex";
     document.getElementById("nev").value = "";
