@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OVI Próbaterem (demo)</title>
-<meta name="description" content="Hangszigetelt próbaterem backline-nal Józsefvárosban — 4000 Ft/óra, cucclerakat, éjszakai sáv. Demo oldal.">
+<title>OVI Próbatermek (demo)</title>
+<meta name="description" content="Négy hangszigetelt próbaterem backline-nal Józsefvárosban — kódzáras belépés, dinamikus árak, fellépési lehetőség. Demo oldal.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥁</text></svg>">
 <style>
   :root {
@@ -13,22 +13,37 @@
     --piros: #ff5d5d;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
     font: 16px/1.6 ui-monospace, "Cascadia Code", "JetBrains Mono", Consolas, monospace;
   }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 18px; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 18px; }
   a { color: var(--sav); }
 
+  nav {
+    position: sticky; top: 0; z-index: 10; background: rgba(14,14,16,.94);
+    border-bottom: 1px solid var(--line); backdrop-filter: blur(6px);
+  }
+  nav .wrap { display: flex; align-items: center; gap: 14px; height: 54px; }
+  .logo { color: var(--ink); text-decoration: none; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em; font-size: 14px; }
+  .logo b { color: var(--sav); }
+  nav .menu { margin-left: auto; display: flex; gap: 14px; flex-wrap: wrap; }
+  nav .menu a { color: var(--mut); text-decoration: none; font-size: 13px; text-transform: uppercase; }
+  nav .menu a:hover { color: var(--sav); }
+  .demobadge { font-size: 10px; background: var(--sav); color: var(--sav-ink);
+    padding: 2px 7px; font-weight: 700; letter-spacing: .08em; }
+
   header {
-    padding: 60px 0 40px; border-bottom: 1px solid var(--line);
+    padding: 56px 0 40px; border-bottom: 1px solid var(--line);
     background: radial-gradient(600px 260px at 80% 0%, rgba(215,251,70,.08), transparent);
   }
   .cimke { color: var(--sav); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
-  h1 { margin: 8px 0 10px; font-size: clamp(30px, 6vw, 52px); line-height: 1.05;
+  h1 { margin: 8px 0 10px; font-size: clamp(30px, 6vw, 50px); line-height: 1.05;
        letter-spacing: -.02em; text-transform: uppercase; }
   h1 .ki { color: var(--sav); }
-  header p { color: var(--mut); max-width: 560px; margin: 0 0 24px; }
+  header p { color: var(--mut); max-width: 600px; margin: 0 0 24px; }
   .gomb {
     display: inline-block; padding: 12px 22px; border: 2px solid var(--sav);
     background: var(--sav); color: var(--sav-ink); font: inherit; font-weight: 700;
@@ -44,6 +59,13 @@
        margin: 0 0 18px; }
   h2::before { content: "// "; color: var(--mut); }
 
+  .termek { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .teremk { background: var(--panel); border: 1px solid var(--line); padding: 18px; }
+  .teremk .nevsor { display: flex; align-items: baseline; gap: 10px; }
+  .teremk h3 { margin: 0; font-size: 22px; }
+  .teremk .m2 { color: var(--sav); font-weight: 700; }
+  .teremk p { color: var(--mut); font-size: 13px; margin: 8px 0 0; }
+
   .racs2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 720px) { .racs2 { grid-template-columns: 1fr; } }
   .doboz { background: var(--panel); border: 1px solid var(--line); padding: 20px; }
@@ -52,20 +74,44 @@
   .doboz li strong { color: var(--ink); }
 
   table.arak { width: 100%; border-collapse: collapse; }
-  table.arak td { padding: 12px 4px; border-bottom: 1px dashed var(--line); }
+  table.arak th { text-align: right; color: var(--mut); font-weight: 400; font-size: 13px;
+    padding: 6px 4px; border-bottom: 1px solid var(--line); }
+  table.arak th:first-child { text-align: left; }
+  table.arak td { padding: 11px 4px; border-bottom: 1px dashed var(--line); }
   table.arak td.ar { text-align: right; font-weight: 700; white-space: nowrap; }
   table.arak td.megj { color: var(--mut); font-size: 13px; }
 
+  .kod { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .kod { grid-template-columns: 1fr; } }
+  .kod .lepes { background: var(--panel); border: 1px solid var(--line); padding: 18px; }
+  .kod .szam { color: var(--sav); font-size: 26px; font-weight: 700; }
+  .kod h3 { margin: 6px 0 6px; font-size: 15px; text-transform: uppercase; }
+  .kod p { margin: 0; color: var(--mut); font-size: 13.5px; }
+  .kijelzo {
+    display: inline-block; background: #000; border: 1px solid var(--line);
+    padding: 4px 10px; color: var(--sav); letter-spacing: .3em; font-weight: 700;
+  }
+
+  .teremvalaszto { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .tgomb {
+    padding: 8px 16px; border: 1px solid var(--line); background: var(--panel);
+    color: var(--mut); font: inherit; cursor: pointer; font-weight: 700;
+  }
+  .tgomb[aria-pressed="true"] { background: var(--sav); color: var(--sav-ink); border-color: var(--sav); }
   .savok { overflow-x: auto; }
-  table.het { border-collapse: collapse; width: 100%; min-width: 520px; }
+  table.het { border-collapse: collapse; width: 100%; min-width: 560px; }
   table.het th, table.het td {
     border: 1px solid var(--line); padding: 8px 6px; text-align: center; font-size: 13px;
   }
   table.het th { color: var(--mut); font-weight: 400; }
-  td.szabad { background: rgba(215,251,70,.12); color: var(--sav); cursor: pointer; }
+  td.szabad { background: rgba(215,251,70,.12); color: var(--sav); cursor: pointer; white-space: nowrap; }
   td.szabad:hover { background: rgba(215,251,70,.25); }
   td.foglalt { color: #5c5c66; text-decoration: line-through; }
   .jelmagyarazat { color: var(--mut); font-size: 13px; margin-top: 10px; }
+
+  .fellep { border: 1px solid var(--sav); background: rgba(215,251,70,.05); padding: 24px; }
+  .fellep p { color: var(--mut); }
+  .fellep p strong { color: var(--ink); }
 
   .hazirend li { margin: 9px 0; }
 
@@ -77,69 +123,121 @@
 </head>
 <body>
 
+<nav><div class="wrap">
+  <a class="logo" href="#">OVI <b>Próbatermek</b></a>
+  <span class="demobadge">DEMO</span>
+  <div class="menu">
+    <a href="#termek">Termek</a>
+    <a href="#belepes">Belépés</a>
+    <a href="#savok">Sávok + árak</a>
+    <a href="#fellepes">Fellépés</a>
+    <a href="#hazirend">Házirend</a>
+  </div>
+</div></nav>
+
 <header><div class="wrap">
   <div class="cimke">OVI · Józsefváros · demo</div>
-  <h1>Próbaterem.<br><span class="ki">Backline-nal.</span></h1>
-  <p>Hangszigetelt terem egy volt óvoda pincéjében. Bedobod a cuccod, bedugod a
-  gitárt, nyomjátok. Már <strong style="color:var(--sav)">2 500 Ft/órától</strong> —
-  az ár a sávtól függ, és a dobcucc már ott van.</p>
+  <h1>Négy próbaterem.<br><span class="ki">Backline-nal. Kódra nyílik.</span></h1>
+  <p>2×18 m² és 2×26 m² hangszigetelt terem egy volt óvoda pincéjében. Foglalsz,
+  kapod az ajtókódot, nyomjátok — már 2 000 Ft/órától, az ár a sávtól függ.</p>
   <button class="gomb foglalo" type="button">Sávot foglalok</button>
   <a class="gomb ures" href="#savok">Szabad sávok</a>
 </div></header>
 
-<section><div class="wrap racs2">
-  <div class="doboz">
-    <h2>Backline</h2>
-    <ul>
-      <li><strong>Dobszett</strong> (lábgép, cintányérok — pergőt hozz)</li>
-      <li><strong>2× gitárkombó</strong> + <strong>basszuskombó</strong></li>
-      <li><strong>PA + 2 mikrofon</strong> énekhez</li>
-      <li>Kottaállványok, hosszabbítók, tartalék húr a pultnál</li>
-      <li>Léghűtés nyáron, fűtés télen — nem gyakorlunk kabátban</li>
-    </ul>
+<section id="termek"><div class="wrap">
+  <h2>A termek</h2>
+  <div class="termek">
+    <div class="teremk"><div class="nevsor"><h3>A</h3><span class="m2">18 m²</span></div>
+      <p>Kompakt terem 2–4 fős zenekarnak. Alap backline: dob, gitárkombó, basszuskombó, PA.</p></div>
+    <div class="teremk"><div class="nevsor"><h3>B</h3><span class="m2">18 m²</span></div>
+      <p>Az A ikertestvére — ugyanaz a cucc, másik ajtó. Duóknak, íróknak, énekpróbához is jó.</p></div>
+    <div class="teremk"><div class="nevsor"><h3>C</h3><span class="m2">26 m²</span></div>
+      <p>Tágas terem 4+ fős zenekarnak. Teljes backline: dob, 2 gitárkombó, basszus, PA + 3 mikrofon.</p></div>
+    <div class="teremk"><div class="nevsor"><h3>D</h3><span class="m2">26 m²</span></div>
+      <p>A nagy testvér billentyű-sarokkal és a cucclerakat szomszédságában — bérlők kedvence.</p></div>
   </div>
-  <div class="doboz">
-    <h2>Árak — sávtól függ <span style="color:var(--mut);font-size:12px;">(demo)</span></h2>
-    <table class="arak">
-      <tr><td>Délelőtt (10–13)</td><td class="ar">2 500 Ft/óra</td></tr>
-      <tr><td>Délután (13–16)</td><td class="ar">3 000 Ft/óra</td></tr>
-      <tr><td>Kora este (16–19)</td><td class="ar">4 000 Ft/óra</td></tr>
-      <tr><td>Este (19–22) — prime time</td><td class="ar">5 000 Ft/óra</td></tr>
-      <tr><td>🔥 Last-minute (mai üres sáv)</td><td class="ar">−30%</td></tr>
-      <tr><td>Havi fix sáv (heti 1×3 óra)</td><td class="ar">45 000 Ft — fix, védett ár</td></tr>
-      <tr><td>Cucclerakat bérlőknek</td><td class="ar">+5 000 Ft/hó</td></tr>
-      <tr><td class="megj" colspan="2">Az árak szabály szerint mozognak, nem alkudozás:
-        ami üresen maradna mára, olcsóbb lesz — iratkozz fel a sáv-riasztásra.
-        A havi bérlőket az ármozgás nem érinti.</td></tr>
-    </table>
+</div></section>
+
+<section id="belepes"><div class="wrap">
+  <h2>Kódra nyílik — nincs kulcsosdi</h2>
+  <div class="kod">
+    <div class="lepes"><div class="szam">1</div><h3>Foglalsz online</h3>
+      <p>Kiválasztod a termet és a sávot, fizetsz — kész.</p></div>
+    <div class="lepes"><div class="szam">2</div><h3>Jön a kódod</h3>
+      <p>E-mailben/SMS-ben kapod az ajtókódot: <span class="kijelzo">4 8 2 7</span><br>
+      Minden foglaláshoz új kód generálódik, a sávod idejére érvényes.</p></div>
+    <div class="lepes"><div class="szam">3</div><h3>Bepötyögöd, nyomjátok</h3>
+      <p>Se kulcsátadás, se várakozás, se nyitvatartás — a terem akkor a tiétek,
+      amikor a sávod él.</p></div>
   </div>
 </div></section>
 
 <section id="savok"><div class="wrap">
   <h2>Szabad sávok ezen a héten — árral</h2>
+  <div class="teremvalaszto" id="teremvalaszto"></div>
   <div class="savok"><table class="het" id="hetitabla"></table></div>
   <p class="jelmagyarazat">■ <span style="color:var(--sav)">szabad (ár)</span> ·
     <span style="color:var(--piros)">🔥 mai last-minute −30%</span> ·
     <s style="color:#5c5c66">foglalt</s> — kattints egy szabad sávra a foglaláshoz (demo)</p>
+  <div class="racs2" style="margin-top:18px;">
+    <div class="doboz">
+      <h2>Árak — sávtól és teremtől függ</h2>
+      <table class="arak">
+        <tr><th>Idősáv</th><th>18 m² (A/B)</th><th>26 m² (C/D)</th></tr>
+        <tr><td>Délelőtt (10–13)</td><td class="ar">2 000 Ft</td><td class="ar">2 500 Ft</td></tr>
+        <tr><td>Délután (13–16)</td><td class="ar">2 500 Ft</td><td class="ar">3 000 Ft</td></tr>
+        <tr><td>Kora este (16–19)</td><td class="ar">3 200 Ft</td><td class="ar">4 000 Ft</td></tr>
+        <tr><td>Este (19–22)</td><td class="ar">4 000 Ft</td><td class="ar">5 000 Ft</td></tr>
+        <tr><td>🔥 Mai üres sáv</td><td class="ar" colspan="2">−30%</td></tr>
+        <tr><td class="megj" colspan="3">Óránkénti árak, áfával (demo). Az ár csak
+          LEFELÉ mozog: a cél az üres sávok megtöltése, nem a népszerűek
+          megdrágítása. Iratkozz fel a sáv-riasztásra!</td></tr>
+      </table>
+    </div>
+    <div class="doboz">
+      <h2>Bérleteknek</h2>
+      <table class="arak">
+        <tr><td>10 órás bérlet (A/B)</td><td class="ar">18 000 Ft</td></tr>
+        <tr><td>10 órás bérlet (C/D)</td><td class="ar">22 000 Ft</td></tr>
+        <tr><td>Havi fix sáv, heti 1×3 óra (A/B)</td><td class="ar">38 000 Ft</td></tr>
+        <tr><td>Havi fix sáv, heti 1×3 óra (C/D)</td><td class="ar">45 000 Ft</td></tr>
+        <tr><td>Cucclerakat bérlőknek</td><td class="ar">+5 000 Ft/hó</td></tr>
+        <tr><td class="megj" colspan="2">A havi bérlők fix, védett áron — őket az
+          ármozgás nem érinti. Éjszakai sáv (22:00 után) bérlőknek egyeztetéssel.</td></tr>
+      </table>
+    </div>
+  </div>
 </div></section>
 
-<section><div class="wrap">
+<section id="fellepes"><div class="wrap">
+  <h2>Fellépési lehetőség — ez itt az extra</h2>
+  <div class="fellep">
+    <p><strong>Aki nálunk próbál, az nálunk színpadra is állhat.</strong> Havonta
+    OVI Bemutatkozó Estet tartunk a nagyteremben: hang- és fénytechnika, hangmérnök,
+    közönség — a próbatermes zenekaroknak ingyen.</p>
+    <p>Jelentkezni a pultnál vagy itt lehet; az aktív bérlők előnyt élveznek.
+    A legjobban muzsikáló zenekarok a rendes koncertprogramba is bekerülhetnek —
+    ez nem ígéret, ez a ház koncepciója: a pincéből a színpadra.</p>
+    <button class="gomb jelentkezes" type="button">Jelentkezem a Bemutatkozó Estre</button>
+  </div>
+</div></section>
+
+<section id="hazirend"><div class="wrap">
   <h2>Házirend</h2>
   <div class="doboz"><ul class="hazirend">
     <li>A sávod akkor kezdődik, amikor kezdődik — a pakolás is benne van.</li>
-    <li>Cuccot a következő zenekar érkezéséig pakold el, vagy bérelj lerakatot.</li>
+    <li>A kódod csak a te sávodra jó — engedj be mindenkit, aki veled zenél, mást ne.</li>
+    <li>Cuccot a sávod végéig pakold el, vagy bérelj lerakatot.</li>
     <li>A backline-t úgy add tovább, ahogy kaptad. Ami elszakad, szólj — pótoljuk, megbeszéljük.</li>
-    <li>Sört-üdítőt a pultról vihettek le. Saját pia no-go — ebből él a ház.</li>
-    <li>Fellépési lehetőség: a legjobban nyomó próbatermes zenekarok az OVI
-      színpadán mutatkozhatnak be. Ez nem vicc, ez a terv.</li>
+    <li>Sört-üdítőt a pultról vihettek le nyitvatartásban. Saját pia no-go — ebből él a ház.</li>
   </ul></div>
 </div></section>
 
 <footer><div class="wrap">
-  OVI Próbaterem · 1084 Budapest, Példa utca 8. (demo-cím) · proba@ovi-demo.hu<br><br>
+  OVI Próbatermek · 1084 Budapest, Példa utca 8. (demo-cím) · proba@ovi-demo.hu<br><br>
   <strong>DEMO / látványterv</strong> — minden adat kitalált. A foglalás élesben
-  Cal.com-naptárból menne. · <a href="../kulso/">programok és bulik</a> ·
-  <a href="../berles/">hivatalos terembérlés</a>
+  Cal.com-naptárból menne, a kódzár a foglalórendszerrel összekötve. ·
+  <a href="../kulso/">programok és bulik</a> · <a href="../berles/">hivatalos terembérlés</a>
 </div></footer>
 
 <script>
@@ -147,52 +245,86 @@
   "use strict";
   var NAPOK = ["H", "K", "Sze", "Cs", "P", "Szo", "V"];
   var SAVOK = ["10–13", "13–16", "16–19", "19–22"];
-  var SAV_AR = [2500, 3000, 4000, 5000];      // dinamikus alapárak idősáv szerint
-  // kamu foglaltság: determinisztikus minta, hogy élethű legyen
-  var FOGLALT = { "0-2": 1, "0-3": 1, "1-3": 1, "2-1": 1, "2-3": 1, "3-0": 1,
-                  "4-2": 1, "4-3": 1, "5-3": 1 };
+  var TERMEK = [
+    { nev: "A", meret: 18, arak: [2000, 2500, 3200, 4000] },
+    { nev: "B", meret: 18, arak: [2000, 2500, 3200, 4000] },
+    { nev: "C", meret: 26, arak: [2500, 3000, 4000, 5000] },
+    { nev: "D", meret: 26, arak: [2500, 3000, 4000, 5000] }
+  ];
   var MA = (new Date().getDay() + 6) % 7;      // hét napja, H=0
+  var aktivTerem = 0;
+
+  // kamu foglaltság: determinisztikus, termenként eltérő, esti sávok teltebbek
+  function foglalt(terem, nap, sav) {
+    var h = (nap * 3 + sav * 5 + terem * 7) % 11;
+    return h < (sav >= 2 ? 4 : 2);
+  }
 
   function ft(n) { return n.toLocaleString("hu-HU") + " Ft"; }
 
   var t = document.getElementById("hetitabla");
-  var fej = "<tr><th></th>" + NAPOK.map(function (n, i) {
-    return "<th>" + n + (i === MA ? " <span style='color:var(--piros)'>MA</span>" : "") + "</th>";
-  }).join("") + "</tr>";
-  t.innerHTML = fej;
-  SAVOK.forEach(function (s, si) {
-    var sor = document.createElement("tr");
-    sor.innerHTML = "<th>" + s + "</th>";
-    NAPOK.forEach(function (_n, ni) {
-      var c = document.createElement("td");
-      if (FOGLALT[ni + "-" + si]) { c.className = "foglalt"; c.textContent = "×"; }
-      else {
-        c.className = "szabad";
-        var ar = SAV_AR[si];
-        if (ni === MA) {                        // last-minute: a mai üres sávok −30%
-          ar = Math.round(ar * 0.7 / 100) * 100;
-          c.innerHTML = "🔥 " + ft(ar);
-          c.title = "Mai last-minute ár (−30%)";
-          c.style.color = "var(--piros)";
-        } else {
-          c.textContent = ft(ar);
+  function rajzol() {
+    var terem = TERMEK[aktivTerem];
+    var fej = "<tr><th>" + terem.nev + " · " + terem.meret + " m²</th>" +
+      NAPOK.map(function (n, i) {
+        return "<th>" + n + (i === MA ? " <span style='color:var(--piros)'>MA</span>" : "") + "</th>";
+      }).join("") + "</tr>";
+    t.innerHTML = fej;
+    SAVOK.forEach(function (s, si) {
+      var sor = document.createElement("tr");
+      sor.innerHTML = "<th>" + s + "</th>";
+      NAPOK.forEach(function (_n, ni) {
+        var c = document.createElement("td");
+        if (foglalt(aktivTerem, ni, si)) { c.className = "foglalt"; c.textContent = "×"; }
+        else {
+          c.className = "szabad";
+          var ar = terem.arak[si];
+          if (ni === MA) {                      // last-minute: a mai üres sávok −30%
+            ar = Math.round(ar * 0.7 / 100) * 100;
+            c.innerHTML = "🔥 " + ft(ar);
+            c.title = "Mai last-minute ár (−30%)";
+            c.style.color = "var(--piros)";
+          } else {
+            c.textContent = ft(ar);
+          }
+          c.addEventListener("click", function () {
+            var volt = c.innerHTML;
+            c.innerHTML = "demo 🤘";
+            setTimeout(function () { c.innerHTML = volt; }, 1200);
+          });
         }
-        c.addEventListener("click", function () {
-          var volt = c.innerHTML;
-          c.innerHTML = "demo 🤘";
-          setTimeout(function () { c.innerHTML = volt; }, 1200);
-        });
-      }
-      sor.appendChild(c);
+        sor.appendChild(c);
+      });
+      t.appendChild(sor);
     });
-    t.appendChild(sor);
-  });
+  }
 
-  document.querySelectorAll(".foglalo").forEach(function (g) {
-    g.addEventListener("click", function () {
-      var e = g.textContent; g.textContent = "Demo — itt nyílna a naptár"; g.disabled = true;
-      setTimeout(function () { g.textContent = e; g.disabled = false; }, 1400);
+  var valaszto = document.getElementById("teremvalaszto");
+  TERMEK.forEach(function (terem, i) {
+    var b = document.createElement("button");
+    b.className = "tgomb"; b.type = "button";
+    b.textContent = terem.nev + " · " + terem.meret + " m²";
+    b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+    b.addEventListener("click", function () {
+      aktivTerem = i;
+      valaszto.querySelectorAll(".tgomb").forEach(function (x) {
+        x.setAttribute("aria-pressed", x === b ? "true" : "false");
+      });
+      rajzol();
     });
+    valaszto.appendChild(b);
+  });
+  rajzol();
+
+  function demoGomb(g, szoveg) {
+    var e = g.textContent; g.textContent = szoveg; g.disabled = true;
+    setTimeout(function () { g.textContent = e; g.disabled = false; }, 1400);
+  }
+  document.querySelectorAll(".foglalo").forEach(function (g) {
+    g.addEventListener("click", function () { demoGomb(g, "Demo — itt nyílna a naptár"); });
+  });
+  document.querySelectorAll(".jelentkezes").forEach(function (g) {
+    g.addEventListener("click", function () { demoGomb(g, "Demo — jelentkezés elküldve 🤘"); });
   });
 })();
 </script>
