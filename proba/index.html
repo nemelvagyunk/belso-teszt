@@ -81,7 +81,8 @@
   <div class="cimke">OVI · Józsefváros · demo</div>
   <h1>Próbaterem.<br><span class="ki">Backline-nal.</span></h1>
   <p>Hangszigetelt terem egy volt óvoda pincéjében. Bedobod a cuccod, bedugod a
-  gitárt, nyomjátok. 4 000 Ft/óra, és a dobcucc már ott van.</p>
+  gitárt, nyomjátok. Már <strong style="color:var(--sav)">2 500 Ft/órától</strong> —
+  az ár a sávtól függ, és a dobcucc már ott van.</p>
   <button class="gomb foglalo" type="button">Sávot foglalok</button>
   <a class="gomb ures" href="#savok">Szabad sávok</a>
 </div></header>
@@ -98,21 +99,27 @@
     </ul>
   </div>
   <div class="doboz">
-    <h2>Árak <span style="color:var(--mut);font-size:12px;">(demo)</span></h2>
+    <h2>Árak — sávtól függ <span style="color:var(--mut);font-size:12px;">(demo)</span></h2>
     <table class="arak">
-      <tr><td>Óradíj</td><td class="ar">4 000 Ft</td></tr>
-      <tr><td>10 órás bérlet</td><td class="ar">35 000 Ft</td></tr>
-      <tr><td>Havi fix sáv (heti 1×3 óra)</td><td class="ar">45 000 Ft</td></tr>
+      <tr><td>Délelőtt (10–13)</td><td class="ar">2 500 Ft/óra</td></tr>
+      <tr><td>Délután (13–16)</td><td class="ar">3 000 Ft/óra</td></tr>
+      <tr><td>Kora este (16–19)</td><td class="ar">4 000 Ft/óra</td></tr>
+      <tr><td>Este (19–22) — prime time</td><td class="ar">5 000 Ft/óra</td></tr>
+      <tr><td>🔥 Last-minute (mai üres sáv)</td><td class="ar">−30%</td></tr>
+      <tr><td>Havi fix sáv (heti 1×3 óra)</td><td class="ar">45 000 Ft — fix, védett ár</td></tr>
       <tr><td>Cucclerakat bérlőknek</td><td class="ar">+5 000 Ft/hó</td></tr>
-      <tr><td class="megj" colspan="2">Éjszakai sáv (22:00 után) bérlőknek egyeztetéssel.</td></tr>
+      <tr><td class="megj" colspan="2">Az árak szabály szerint mozognak, nem alkudozás:
+        ami üresen maradna mára, olcsóbb lesz — iratkozz fel a sáv-riasztásra.
+        A havi bérlőket az ármozgás nem érinti.</td></tr>
     </table>
   </div>
 </div></section>
 
 <section id="savok"><div class="wrap">
-  <h2>Szabad sávok ezen a héten</h2>
+  <h2>Szabad sávok ezen a héten — árral</h2>
   <div class="savok"><table class="het" id="hetitabla"></table></div>
-  <p class="jelmagyarazat">■ <span style="color:var(--sav)">szabad</span> ·
+  <p class="jelmagyarazat">■ <span style="color:var(--sav)">szabad (ár)</span> ·
+    <span style="color:var(--piros)">🔥 mai last-minute −30%</span> ·
     <s style="color:#5c5c66">foglalt</s> — kattints egy szabad sávra a foglaláshoz (demo)</p>
 </div></section>
 
@@ -140,12 +147,18 @@
   "use strict";
   var NAPOK = ["H", "K", "Sze", "Cs", "P", "Szo", "V"];
   var SAVOK = ["10–13", "13–16", "16–19", "19–22"];
+  var SAV_AR = [2500, 3000, 4000, 5000];      // dinamikus alapárak idősáv szerint
   // kamu foglaltság: determinisztikus minta, hogy élethű legyen
   var FOGLALT = { "0-2": 1, "0-3": 1, "1-3": 1, "2-1": 1, "2-3": 1, "3-0": 1,
                   "4-2": 1, "4-3": 1, "5-3": 1 };
+  var MA = (new Date().getDay() + 6) % 7;      // hét napja, H=0
+
+  function ft(n) { return n.toLocaleString("hu-HU") + " Ft"; }
 
   var t = document.getElementById("hetitabla");
-  var fej = "<tr><th></th>" + NAPOK.map(function (n) { return "<th>" + n + "</th>"; }).join("") + "</tr>";
+  var fej = "<tr><th></th>" + NAPOK.map(function (n, i) {
+    return "<th>" + n + (i === MA ? " <span style='color:var(--piros)'>MA</span>" : "") + "</th>";
+  }).join("") + "</tr>";
   t.innerHTML = fej;
   SAVOK.forEach(function (s, si) {
     var sor = document.createElement("tr");
@@ -154,10 +167,20 @@
       var c = document.createElement("td");
       if (FOGLALT[ni + "-" + si]) { c.className = "foglalt"; c.textContent = "×"; }
       else {
-        c.className = "szabad"; c.textContent = "szabad";
+        c.className = "szabad";
+        var ar = SAV_AR[si];
+        if (ni === MA) {                        // last-minute: a mai üres sávok −30%
+          ar = Math.round(ar * 0.7 / 100) * 100;
+          c.innerHTML = "🔥 " + ft(ar);
+          c.title = "Mai last-minute ár (−30%)";
+          c.style.color = "var(--piros)";
+        } else {
+          c.textContent = ft(ar);
+        }
         c.addEventListener("click", function () {
-          c.textContent = "demo 🤘";
-          setTimeout(function () { c.textContent = "szabad"; }, 1200);
+          var volt = c.innerHTML;
+          c.innerHTML = "demo 🤘";
+          setTimeout(function () { c.innerHTML = volt; }, 1200);
         });
       }
       sor.appendChild(c);

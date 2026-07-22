@@ -88,6 +88,16 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
   említés), 2) hivatalos terembérlés-oldal (üzleti stílus, árak, ajánlatkérés),
   3) próbaterem mikro-oldal zenekaroknak (backline, sávok, házirend).
   Demók: /kulso/, /berles/, /proba/ a belso-teszt repóban.
+- **Dinamikus árazás (próbaterem, később akár termek):** ALAPELV — a cél az
+  ÜRES SÁVOK MEGTÖLTÉSE, nem a népszerűek megdrágítása. Az ár a listaárról
+  csak LEFELÉ mozoghat; a prime time (este) listaáron marad mindig.
+  Rétegek: 1) sávos alapárak idősáv szerint (a krónikusan üres délelőtt eleve
+  olcsóbb), nyilvános ártáblával; 2) last-minute töltés: a mára/holnapra üres
+  sáv automatikusan −30%, sáv-riasztás a feliratkozott zenekaroknak;
+  3) a foglalási adatokból (belső rendszer méri a kihasználtságot) az derül ki,
+  MELYIK sávot kell akciózni — nem az, hogy mit drágítsunk.
+  Átlátható, szabály-alapú, kedvezményként kommunikálva (nem surge);
+  a havi bérlők fix, védett áron — a törzsgárda bizalma többet ér.
 
 ## Ovis jel
 
