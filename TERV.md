@@ -102,6 +102,9 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
   pultosokat, lezárja az önkiszolgáló kört (foglalás→fizetés→ajtókód emberi
   kéz nélkül), csökkenti a no-show-t, automatikusan könyvelődik — és a vendég
   úgy érzi, spórolt. Pultnál fizetni lehet, de listaáron.
+  Az online −10% a bérlési oldalon is él (kisterem: konferencia, tréning,
+  pszichodráma-csoportok; udvar) — a szerződéses nagytermi bérlés kivétel,
+  ott egyedi ajánlat megy.
 
 ## Ovis jel
 
