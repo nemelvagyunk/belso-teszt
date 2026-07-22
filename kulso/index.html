@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVI – közösségi és kulturális központ (demo)</title>
+<meta name="description" content="Koncertek, bulik, kultúra és közösségi terek Józsefvárosban — demo oldal.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐞</text></svg>">
+<style>
+  :root {
+    --bg: #14161d; --panel: #1d2029; --panel2: #232734; --ink: #f2f3f7;
+    --mut: #9aa1b5; --line: #2e3342; --acc: #f5b32b; --acc-ink: #1a1405;
+    --koncert: #6fb5ff; --buli: #ff7aa8; --kultura: #7fe0a7;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15.5px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 18px; }
+  a { color: var(--acc); }
+
+  /* nav */
+  nav {
+    position: sticky; top: 0; z-index: 10; background: rgba(20,22,29,.92);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; gap: 18px; height: 58px; }
+  .logo { font-weight: 800; font-size: 19px; letter-spacing: -.02em; color: var(--ink); text-decoration: none; }
+  .logo .jelek { font-size: 15px; letter-spacing: 2px; }
+  nav .menu { margin-left: auto; display: flex; gap: 16px; flex-wrap: wrap; }
+  nav .menu a { color: var(--mut); text-decoration: none; font-size: 14px; }
+  nav .menu a:hover { color: var(--ink); }
+  .demobadge {
+    font-size: 11px; background: var(--acc); color: var(--acc-ink);
+    border-radius: 20px; padding: 2px 8px; font-weight: 700;
+  }
+
+  /* hero */
+  header.hero {
+    padding: 54px 0 30px;
+    background:
+      radial-gradient(700px 300px at 15% 0%, rgba(245,179,43,.16), transparent),
+      radial-gradient(700px 300px at 85% 10%, rgba(255,122,168,.12), transparent);
+  }
+  .hero h1 { margin: 0 0 6px; font-size: clamp(28px, 5vw, 44px); letter-spacing: -.03em; }
+  .hero .alcim { color: var(--mut); margin: 0 0 26px; max-width: 640px; }
+  .kiemelt { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .kiemelt { grid-template-columns: 1fr; } }
+  .promo {
+    border: 1px solid var(--line); border-radius: 16px; padding: 22px;
+    background: linear-gradient(160deg, var(--panel2), var(--panel));
+    position: relative; overflow: hidden;
+  }
+  .promo .cimke { font-size: 12px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--acc); }
+  .promo h2 { margin: 6px 0 4px; font-size: 24px; letter-spacing: -.02em; }
+  .promo .mikor { color: var(--mut); margin-bottom: 14px; }
+  .promo .hatter { position: absolute; right: -10px; bottom: -18px; font-size: 92px; opacity: .12; }
+
+  .gomb {
+    display: inline-block; padding: 10px 18px; border-radius: 10px; border: 0;
+    background: var(--acc); color: var(--acc-ink); font: inherit; font-weight: 700;
+    cursor: pointer; text-decoration: none;
+  }
+  .gomb:hover { filter: brightness(1.08); }
+  .gomb.masodik { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .gomb.masodik:hover { border-color: var(--acc); color: var(--acc); }
+
+  section { padding: 46px 0 8px; }
+  section h2.szekcio { font-size: 26px; letter-spacing: -.02em; margin: 0 0 4px; }
+  section .szekcioal { color: var(--mut); margin: 0 0 20px; }
+
+  /* program */
+  .szurok { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .chip {
+    padding: 7px 14px; border-radius: 20px; border: 1px solid var(--line);
+    background: var(--panel); color: var(--mut); font: inherit; font-size: 13.5px; cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); font-weight: 700; }
+  .szurok .elv { width: 1px; background: var(--line); margin: 4px 6px; }
+  .esemenyek { display: flex; flex-direction: column; gap: 10px; }
+  .esemeny {
+    display: flex; gap: 16px; align-items: center; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
+  }
+  .datum {
+    min-width: 64px; text-align: center; background: var(--panel2);
+    border-radius: 10px; padding: 8px 6px; border: 1px solid var(--line);
+  }
+  .datum .nap { font-size: 21px; font-weight: 800; line-height: 1.1; }
+  .datum .ho { font-size: 11.5px; color: var(--mut); text-transform: uppercase; letter-spacing: .06em; }
+  .einfo { flex: 1; min-width: 0; }
+  .einfo h3 { margin: 0; font-size: 17px; }
+  .einfo .resz { color: var(--mut); font-size: 13.5px; }
+  .kat { font-size: 12px; border-radius: 20px; padding: 2px 10px; font-weight: 700; }
+  .kat.koncert { background: rgba(111,181,255,.15); color: var(--koncert); }
+  .kat.buli    { background: rgba(255,122,168,.15); color: var(--buli); }
+  .kat.kultura { background: rgba(127,224,167,.15); color: var(--kultura); }
+  .esemeny .gomb { white-space: nowrap; }
+  .ures { color: var(--mut); padding: 20px; text-align: center; border: 1px dashed var(--line); border-radius: 14px; }
+
+  /* termek */
+  .termek { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .terem {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .terem .ikon { font-size: 30px; }
+  .terem h3 { margin: 0; font-size: 17px; }
+  .terem p { margin: 0 0 8px; color: var(--mut); font-size: 13.5px; flex: 1; }
+  .terem .gomb { align-self: flex-start; }
+
+  /* rólunk + megközelítés */
+  .ketosztas { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
+  @media (max-width: 800px) { .ketosztas { grid-template-columns: 1fr; } }
+  .kartya { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .kartya p { color: var(--mut); }
+  .kartya p strong { color: var(--ink); }
+  .terkep { width: 100%; height: 260px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel2); }
+  ul.utak { list-style: none; padding: 0; margin: 12px 0 0; color: var(--mut); font-size: 14px; }
+  ul.utak li { margin: 6px 0; }
+
+  footer {
+    margin-top: 54px; border-top: 1px solid var(--line); padding: 26px 0 40px;
+    color: var(--mut); font-size: 13px;
+  }
+  footer .jelek { letter-spacing: 4px; font-size: 16px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="#">🐞 OVI <span class="jelek">🍎🦋⭐</span></a>
+  <span class="demobadge">DEMO</span>
+  <div class="menu">
+    <a href="#program">Program</a>
+    <a href="#termek">Teremfoglalás</a>
+    <a href="#rolunk">Rólunk</a>
+    <a href="#megkozelites">Ide találsz</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <h1>Egykori óvoda, örökmozgó közösség.</h1>
+  <p class="alcim">Koncertek, nappali bulik, kultúra és közösségi terek Józsefváros
+  szívében — egy volt óvoda falai közt, ahol mindenkinek van jele.</p>
+  <div class="kiemelt" id="kiemelt"></div>
+</div></header>
+
+<section id="program"><div class="wrap">
+  <h2 class="szekcio">Program</h2>
+  <p class="szekcioal">Minden, ami nálunk történik — szűrj kedvedre.</p>
+  <div class="szurok">
+    <button class="chip katszuro" data-kat="" aria-pressed="true">Mind</button>
+    <button class="chip katszuro" data-kat="koncert" aria-pressed="false">🎸 Koncert</button>
+    <button class="chip katszuro" data-kat="buli" aria-pressed="false">🎉 Buli</button>
+    <button class="chip katszuro" data-kat="kultura" aria-pressed="false">🎭 Kultúra</button>
+    <span class="elv"></span>
+    <button class="chip idoszuro" data-napok="7" aria-pressed="false">Ez a hét</button>
+    <button class="chip idoszuro" data-napok="31" aria-pressed="true">Egész hónap</button>
+  </div>
+  <div class="esemenyek" id="esemenyek"></div>
+</div></section>
+
+<section id="termek"><div class="wrap">
+  <h2 class="szekcio">Teremfoglalás</h2>
+  <p class="szekcioal">Próbálnál, ünnepelnél, rendezvényt hoznál? Foglalj időpontot online.</p>
+  <div class="termek">
+    <div class="terem"><span class="ikon">🎪</span><h3>Rendezvényterem</h3>
+      <p>250 fős nagyterem színpaddal és hangtechnikával — koncertre, céges és
+      közösségi eseményre.</p>
+      <button class="gomb foglalo" type="button">Időpontfoglalás</button></div>
+    <div class="terem"><span class="ikon">🥁</span><h3>Zenekari próbaterem</h3>
+      <p>Hangszigetelt próbaterem cucclerakattal, órabérben — dobcucc és erősítők
+      a helyszínen.</p>
+      <button class="gomb foglalo" type="button">Időpontfoglalás</button></div>
+    <div class="terem"><span class="ikon">🪑</span><h3>Kisterem</h3>
+      <p>40 fős terem workshopra, körre, olvasókörre, próbára — vetítővel.</p>
+      <button class="gomb foglalo" type="button">Időpontfoglalás</button></div>
+    <div class="terem"><span class="ikon">🎂</span><h3>Szülinap az OVI-ban</h3>
+      <p>Gyerek- és felnőtt szülinapi csomagok az udvarral — ugrálóvártól a DJ-ig.</p>
+      <button class="gomb foglalo" type="button">Időpontfoglalás</button></div>
+  </div>
+</div></section>
+
+<section id="rolunk"><div class="wrap ketosztas">
+  <div class="kartya">
+    <h2 class="szekcio">Rólunk</h2>
+    <p><strong>Az OVI egy egykori józsefvárosi óvodából született közösségi és
+    kulturális központ.</strong> Nappal kávé, munka, körök és gyerekprogramok;
+    este koncertek, bulik, kiállítások és beszélgetések.</p>
+    <p>A helyet egy egyesület és egy kis csapat működteti — hiszünk benne, hogy a
+    kerületnek kell egy hely, ami egyszerre kocsma, kultúrház és játszóudvar.
+    Ahogy az oviban: itt mindenkinek van jele. 🐞🍎🦋⭐🐰🍄☀️🐟</p>
+    <p><em>(Demo-szöveg — a valódi bemutatkozás majd a valódi helyről szól.)</em></p>
+  </div>
+  <div class="kartya" id="megkozelites">
+    <h2 class="szekcio">Ide találsz</h2>
+    <p><strong>1084 Budapest, Példa utca 8.</strong> (demo-cím)</p>
+    <iframe class="terkep" title="Térkép"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=19.062%2C47.487%2C19.086%2C47.497&layer=mapnik"
+      loading="lazy"></iframe>
+    <ul class="utak">
+      <li>🚇 M4 — II. János Pál pápa tér, 5 perc séta</li>
+      <li>🚋 4-6 villamos — Baross utca, 7 perc séta</li>
+      <li>🚌 9 / 99 busz — a sarkon</li>
+      <li>🚲 MOL Bubi állomás a bejárat előtt</li>
+    </ul>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="jelek">🍎 🐞 🦋 ☀️ 🐰 🍄 ⭐ 🐟</div>
+  OVI közösségi és kulturális központ · <strong>DEMO / látványterv</strong> —
+  minden program, név és cím kitalált. A jegy- és foglalás-gombok helyén élesben
+  Cooltix-, illetve Calendly/Cal.com-beágyazás működne.
+</div></footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var HONAPOK = ["jan", "feb", "már", "ápr", "máj", "jún", "júl", "aug", "szep", "okt", "nov", "dec"];
+  var NAPOK = ["vasárnap", "hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat"];
+  var KATNEV = { koncert: "🎸 koncert", buli: "🎉 buli", kultura: "🎭 kultúra" };
+
+  function nap(offset) {
+    var d = new Date(); d.setHours(12, 0, 0, 0); d.setDate(d.getDate() + offset);
+    return d;
+  }
+
+  // Kamu programok: a mai naphoz képest mindig előre (a demo sosem évül el)
+  var ESEMENYEK = [
+    { o: 1,  kat: "kultura", cim: "Irodalmi est: fiatal józsefvárosi költők", ido: "19:00", hely: "kisterem" },
+    { o: 2,  kat: "koncert", cim: "Szélrózsa • lemezbemutató koncert", ido: "20:00", hely: "rendezvényterem" },
+    { o: 3,  kat: "buli",    cim: "Daytime Buli vol. 4. — kert, lemezek, limonádé", ido: "14:00–20:00", hely: "udvar", promo: true, promocim: "DAYTIME" },
+    { o: 6,  kat: "kultura", cim: "Gyerekkoncert + családi délelőtt", ido: "10:30", hely: "udvar" },
+    { o: 8,  kat: "koncert", cim: "Terra Nova + vendég: Kavicsok", ido: "20:30", hely: "rendezvényterem" },
+    { o: 10, kat: "buli",    cim: "OVI Night — funk & soul lemezest", ido: "21:00", hely: "rendezvényterem" },
+    { o: 13, kat: "kultura", cim: "Kiállításmegnyitó: Nyolcker fotókon", ido: "18:00", hely: "folyosó-galéria" },
+    { o: 15, kat: "koncert", cim: "Akusztikus estek: Holdudvar duó", ido: "19:30", hely: "kisterem" },
+    { o: 18, kat: "buli",    cim: "Bakelit börze + délutáni DJ-szett", ido: "12:00–18:00", hely: "udvar" },
+    { o: 21, kat: "kultura", cim: "Társasjáték-klub nyílt este", ido: "18:00", hely: "kisterem" },
+    { o: 24, kat: "koncert", cim: "Vaskarika • punk est három zenekarral", ido: "20:00", hely: "rendezvényterem" },
+    { o: 27, kat: "buli",    cim: "OVI Udvarfeszt — kétnapos minifesztivál", ido: "szo–vas", hely: "az egész ház", promo: true, promocim: "FESZTIVÁL" },
+    { o: 30, kat: "kultura", cim: "Dokufilm-klub + beszélgetés a rendezővel", ido: "19:00", hely: "kisterem" }
+  ];
+
+  function demoGomb(gomb, szoveg) {
+    var eredeti = gomb.textContent;
+    gomb.textContent = szoveg;
+    gomb.disabled = true;
+    setTimeout(function () { gomb.textContent = eredeti; gomb.disabled = false; }, 1400);
+  }
+
+  // hero: a két promózott esemény
+  var kiemelt = document.getElementById("kiemelt");
+  ESEMENYEK.filter(function (e) { return e.promo; }).slice(0, 2).forEach(function (e) {
+    var d = nap(e.o);
+    var div = document.createElement("div");
+    div.className = "promo";
+    div.innerHTML =
+      "<span class='cimke'>" + e.promocim + " · hamarosan</span>" +
+      "<h2>" + e.cim + "</h2>" +
+      "<div class='mikor'>" + d.getMonth() + 1 + "</div>";
+    div.querySelector(".mikor").textContent =
+      HONAPOK[d.getMonth()] + " " + d.getDate() + ". (" + NAPOK[d.getDay()] + ") · " + e.ido + " · " + e.hely;
+    var g = document.createElement("button");
+    g.className = "gomb"; g.type = "button"; g.textContent = "Jegyek 🎟️";
+    g.addEventListener("click", function () { demoGomb(g, "Demo — itt nyílna a Cooltix"); });
+    div.appendChild(g);
+    var hat = document.createElement("span");
+    hat.className = "hatter";
+    hat.textContent = e.kat === "buli" ? "🎉" : "🎪";
+    div.appendChild(hat);
+    kiemelt.appendChild(div);
+  });
+
+  // program-lista
+  var kat = "", napok = 31;
+  var lista = document.getElementById("esemenyek");
+
+  function rajzol() {
+    lista.innerHTML = "";
+    var talalat = ESEMENYEK.filter(function (e) {
+      return (!kat || e.kat === kat) && e.o <= napok;
+    });
+    if (!talalat.length) {
+      var u = document.createElement("div");
+      u.className = "ures";
+      u.textContent = "Ebben az időszakban nincs ilyen program — nézd meg az egész hónapot!";
+      lista.appendChild(u);
+      return;
+    }
+    talalat.forEach(function (e) {
+      var d = nap(e.o);
+      var sor = document.createElement("div");
+      sor.className = "esemeny";
+      var dat = document.createElement("div");
+      dat.className = "datum";
+      dat.innerHTML = "<div class='nap'>" + d.getDate() + "</div><div class='ho'>" +
+        HONAPOK[d.getMonth()] + "</div>";
+      var info = document.createElement("div");
+      info.className = "einfo";
+      var h3 = document.createElement("h3"); h3.textContent = e.cim;
+      var resz = document.createElement("div");
+      resz.className = "resz";
+      resz.textContent = NAPOK[d.getDay()] + " · " + e.ido + " · " + e.hely + "  ";
+      var kchip = document.createElement("span");
+      kchip.className = "kat " + e.kat; kchip.textContent = KATNEV[e.kat];
+      resz.appendChild(kchip);
+      info.appendChild(h3); info.appendChild(resz);
+      var g = document.createElement("button");
+      g.className = "gomb" + (e.kat === "kultura" ? " masodik" : "");
+      g.type = "button";
+      g.textContent = e.kat === "kultura" ? "Ingyenes" : "Jegyek 🎟️";
+      g.addEventListener("click", function () {
+        demoGomb(g, e.kat === "kultura" ? "Demo — gyere el!" : "Demo — itt nyílna a Cooltix");
+      });
+      sor.appendChild(dat); sor.appendChild(info); sor.appendChild(g);
+      lista.appendChild(sor);
+    });
+  }
+
+  document.querySelectorAll(".katszuro").forEach(function (b) {
+    b.addEventListener("click", function () {
+      kat = b.dataset.kat;
+      document.querySelectorAll(".katszuro").forEach(function (x) {
+        x.setAttribute("aria-pressed", x === b ? "true" : "false");
+      });
+      rajzol();
+    });
+  });
+  document.querySelectorAll(".idoszuro").forEach(function (b) {
+    b.addEventListener("click", function () {
+      napok = parseInt(b.dataset.napok, 10);
+      document.querySelectorAll(".idoszuro").forEach(function (x) {
+        x.setAttribute("aria-pressed", x === b ? "true" : "false");
+      });
+      rajzol();
+    });
+  });
+
+  document.querySelectorAll(".foglalo").forEach(function (g) {
+    g.addEventListener("click", function () {
+      demoGomb(g, "Demo — itt nyílna a Calendly/Cal.com");
+    });
+  });
+
+  rajzol();
+})();
+</script>
+</body>
+</html>
