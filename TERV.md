@@ -98,6 +98,10 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
   MELYIK sávot kell akciózni — nem az, hogy mit drágítsunk.
   Átlátható, szabály-alapú, kedvezményként kommunikálva (nem surge);
   a havi bérlők fix, védett áron — a törzsgárda bizalma többet ér.
+  + **Online fizetve −10%** (a last-minute-tel összeadódik): tehermentesíti a
+  pultosokat, lezárja az önkiszolgáló kört (foglalás→fizetés→ajtókód emberi
+  kéz nélkül), csökkenti a no-show-t, automatikusan könyvelődik — és a vendég
+  úgy érzi, spórolt. Pultnál fizetni lehet, de listaáron.
 
 ## Ovis jel
 
