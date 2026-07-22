@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belső oldal – teszt</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --ink: #1a2233; --mut: #66707f;
+    --line: #e3e6ea; --acc: #1d5fbf; --acc-soft: #e8f0fb; --hiba: #a01d1d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink); min-height: 100vh;
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* ---- beléptető ---- */
+  #kapu {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .login {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 30px 28px; width: 100%; max-width: 360px;
+    box-shadow: 0 6px 30px rgba(20,30,50,.08);
+  }
+  .login h1 { margin: 0 0 2px; font-size: 22px; letter-spacing: -.02em; }
+  .login .alcim { color: var(--mut); font-size: 13.5px; margin: 0 0 20px; }
+  .login label { display: block; font-size: 13px; color: var(--mut); margin: 12px 0 4px; }
+  .login input {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--line);
+    border-radius: 8px; font: inherit; background: var(--bg);
+  }
+  .login input:focus { outline: 2px solid var(--acc); outline-offset: 1px; border-color: var(--acc); }
+  .login button {
+    width: 100%; margin-top: 18px; padding: 11px; font: inherit; font-weight: 600;
+    background: var(--acc); color: #fff; border: 0; border-radius: 8px; cursor: pointer;
+  }
+  .login button:hover { filter: brightness(1.1); }
+  #hibauzenet { color: var(--hiba); font-size: 13.5px; min-height: 20px; margin: 10px 0 0; }
+  .demo {
+    margin-top: 18px; padding: 10px 12px; background: var(--acc-soft);
+    border-radius: 8px; font-size: 12.5px; color: var(--mut);
+  }
+  .demo code { background: #fff; padding: 1px 5px; border-radius: 4px; }
+  .razas { animation: raz .35s; }
+  @keyframes raz {
+    0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-8px); }
+    40%,80% { transform: translateX(8px); }
+  }
+
+  /* ---- belső oldal ---- */
+  #belso { display: none; max-width: 880px; margin: 0 auto; padding: 24px 16px 60px; }
+  #belso header {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px; margin-bottom: 20px;
+  }
+  #belso h1 { margin: 0; font-size: 24px; letter-spacing: -.02em; }
+  #udv { color: var(--mut); font-size: 14px; }
+  #kilep {
+    padding: 8px 16px; font: inherit; background: var(--card); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
+  }
+  #kilep:hover { border-color: var(--acc); color: var(--acc); }
+  .racs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .doboz {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px;
+  }
+  .doboz h2 { margin: 0 0 6px; font-size: 16px; }
+  .doboz p { margin: 0; color: var(--mut); font-size: 13.5px; }
+  .figyelm {
+    margin-top: 26px; padding: 12px 14px; border: 1px dashed var(--line);
+    border-radius: 10px; color: var(--mut); font-size: 12.5px;
+  }
+</style>
+</head>
+<body>
+
+<div id="kapu">
+  <form class="login" id="loginform" autocomplete="off">
+    <h1>🔐 Belső oldal</h1>
+    <p class="alcim">Közösségi-kulturális központ – teszt beléptető</p>
+    <label for="nev">Felhasználónév</label>
+    <input id="nev" type="text" required autofocus>
+    <label for="jelszo">Jelszó</label>
+    <input id="jelszo" type="password" required>
+    <p id="hibauzenet"></p>
+    <button type="submit">Belépés</button>
+    <div class="demo">
+      Teszt-fiókok: <code>attila</code> / <code>teszt123</code> &nbsp;·&nbsp;
+      <code>vendeg</code> / <code>vendeg</code>
+    </div>
+  </form>
+</div>
+
+<div id="belso">
+  <header>
+    <div>
+      <h1>Belső oldal</h1>
+      <span id="udv"></span>
+    </div>
+    <button id="kilep">Kilépés</button>
+  </header>
+  <div class="racs">
+    <div class="doboz"><h2>📄 Dokumentumok</h2>
+      <p>Alapszabály, szerződés-sablonok, engedélyek — ide kerülnének a belső anyagok.</p></div>
+    <div class="doboz"><h2>📅 Naptár</h2>
+      <p>Próbatermi beosztás, rendezvénynaptár, határidők.</p></div>
+    <div class="doboz"><h2>📡 Pályázatok</h2>
+      <p>A pályázatradar szűrt nézete — csak ami tényleg rátok vonatkozik.</p></div>
+    <div class="doboz"><h2>💬 Faliújság</h2>
+      <p>Belső hírek, teendők, ki mit vállalt.</p></div>
+  </div>
+  <p class="figyelm">⚠️ Ez egy kliensoldali teszt-beléptető: kényelmes kapu, de nem valódi
+  biztonsági védelem — érzékeny adat ilyen mögé nem való. Az éles belső oldalhoz
+  szerveroldali bejelentkezés kell majd (pl. Cloudflare Access / Firebase Auth).</p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Felhasználók: {név: SHA-256(jelszó) hex}. Új jelszó-hash készítése a
+  // böngésző konzoljában:
+  //   crypto.subtle.digest("SHA-256", new TextEncoder().encode("UJJELSZO"))
+  //     .then(b => console.log([...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("")))
+  var FELHASZNALOK = {
+    "attila": "84705490f0b38f4cf505c9313ef1ffb9478cee73388b2a2d1e1d1c29a0e3d935", // teszt123
+    "vendeg": "cdeae1a6b106e49b55f45bbe641dac0346d461e00d7b09388afa3f81444d44ff"  // vendeg
+  };
+
+  var bejelentkezve = null;   // csak memóriában — újratöltésnél újra kér
+
+  function hex(buf) {
+    return Array.prototype.map.call(new Uint8Array(buf), function (x) {
+      return x.toString(16).padStart(2, "0");
+    }).join("");
+  }
+
+  function sha256(szoveg) {
+    return crypto.subtle.digest("SHA-256", new TextEncoder().encode(szoveg)).then(hex);
+  }
+
+  var form = document.getElementById("loginform");
+  var hibae = document.getElementById("hibauzenet");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nev = document.getElementById("nev").value.trim().toLowerCase();
+    var jelszo = document.getElementById("jelszo").value;
+    sha256(jelszo).then(function (h) {
+      if (FELHASZNALOK[nev] && FELHASZNALOK[nev] === h) {
+        bejelentkezve = nev;
+        hibae.textContent = "";
+        document.getElementById("kapu").style.display = "none";
+        document.getElementById("belso").style.display = "block";
+        document.getElementById("udv").textContent =
+          "Bejelentkezve: " + nev + " · " + new Date().toLocaleDateString("hu-HU");
+      } else {
+        hibae.textContent = "Hibás felhasználónév vagy jelszó.";
+        document.getElementById("jelszo").value = "";
+        form.classList.remove("razas");
+        void form.offsetWidth;            // animáció újraindítása
+        form.classList.add("razas");
+      }
+    }).catch(function () {
+      hibae.textContent = "A jelszó-ellenőrzés nem érhető el ebben a böngészőben.";
+    });
+  });
+
+  document.getElementById("kilep").addEventListener("click", function () {
+    bejelentkezve = null;
+    document.getElementById("belso").style.display = "none";
+    document.getElementById("kapu").style.display = "flex";
+    document.getElementById("nev").value = "";
+    document.getElementById("jelszo").value = "";
+    document.getElementById("nev").focus();
+  });
+})();
+</script>
+</body>
+</html>
