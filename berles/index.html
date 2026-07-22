@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVI Rendezvényház – Terembérlés (demo)</title>
+<meta name="description" content="Rendezvényterem, kisterem és próbaterem bérlése Józsefvárosban — hivatalos bérlési információk, árak, ajánlatkérés. Demo oldal.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+<style>
+  :root {
+    --bg: #f7f8fa; --card: #ffffff; --ink: #1c2733; --mut: #5c6b7a;
+    --line: #dde3e9; --navy: #1f3a5f; --navy2: #16304f; --arany: #b98a2e;
+    --vilagos: #eef2f6;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15.5px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 18px; }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; letter-spacing: -.01em; }
+
+  nav { background: var(--navy); }
+  nav .wrap { display: flex; align-items: center; gap: 16px; height: 60px; }
+  .logo { color: #fff; font-family: Georgia, serif; font-size: 19px; text-decoration: none; }
+  .logo small { color: var(--arany); font-family: system-ui, sans-serif; font-size: 12px;
+    letter-spacing: .12em; text-transform: uppercase; margin-left: 8px; }
+  nav .menu { margin-left: auto; display: flex; gap: 18px; flex-wrap: wrap; }
+  nav .menu a { color: #cfd9e6; text-decoration: none; font-size: 14px; }
+  nav .menu a:hover { color: #fff; }
+  .demobadge { font-size: 11px; background: var(--arany); color: #fff;
+    border-radius: 3px; padding: 2px 8px; font-weight: 700; letter-spacing: .06em; }
+
+  header.fej {
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%);
+    color: #fff; padding: 56px 0 48px;
+  }
+  .fej h1 { margin: 0 0 10px; font-size: clamp(26px, 4.5vw, 38px); font-weight: 500; }
+  .fej p { color: #c3cfdd; max-width: 640px; margin: 0 0 24px; }
+  .gomb {
+    display: inline-block; padding: 11px 22px; border-radius: 4px; border: 0;
+    background: var(--arany); color: #fff; font: inherit; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+  }
+  .gomb:hover { filter: brightness(1.07); }
+  .gomb.korvonal { background: transparent; border: 1px solid #56708f; color: #dde6f0; margin-left: 10px; }
+  .gomb.korvonal:hover { border-color: #fff; color: #fff; }
+
+  section { padding: 46px 0 6px; }
+  section h2 { font-size: 26px; margin: 0 0 4px; color: var(--navy); }
+  section .alcim { color: var(--mut); margin: 0 0 22px; }
+
+  .termek { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 820px) { .termek { grid-template-columns: 1fr; } }
+  .terem {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    overflow: hidden;
+  }
+  .terem .kep {
+    height: 120px; background: var(--vilagos); display: flex; align-items: center;
+    justify-content: center; font-size: 44px; border-bottom: 1px solid var(--line);
+  }
+  .terem .tartalom { padding: 18px 20px 20px; }
+  .terem h3 { margin: 0 0 4px; font-size: 19px; color: var(--navy); }
+  .terem .lead { color: var(--mut); font-size: 14px; margin: 0 0 12px; }
+  table.spec { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 14px; }
+  table.spec td { padding: 6px 2px; border-bottom: 1px solid var(--vilagos); vertical-align: top; }
+  table.spec td:first-child { color: var(--mut); width: 42%; }
+
+  table.arak { width: 100%; border-collapse: collapse; background: var(--card);
+    border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 14.5px; }
+  table.arak th, table.arak td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--vilagos); }
+  table.arak th { background: var(--navy); color: #fff; font-weight: 600; }
+  table.arak td.ar { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .megjegyz { color: var(--mut); font-size: 13px; margin-top: 10px; }
+  .kedvezmeny {
+    margin-top: 14px; background: #f6efdd; border: 1px solid #e4d3a8; border-radius: 8px;
+    padding: 12px 16px; font-size: 14px;
+  }
+
+  .lepesek { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .lepesek { grid-template-columns: 1fr; } }
+  .lepes { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+  .lepes .szam {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--navy); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 10px;
+  }
+  .lepes h3 { margin: 0 0 6px; font-size: 16px; color: var(--navy); }
+  .lepes p { margin: 0; color: var(--mut); font-size: 13.5px; }
+
+  form.ajanlat {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  @media (max-width: 720px) { form.ajanlat { grid-template-columns: 1fr; } }
+  form.ajanlat label { font-size: 13px; color: var(--mut); display: block; margin-bottom: 4px; }
+  form.ajanlat input, form.ajanlat select, form.ajanlat textarea {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 4px;
+    font: inherit; background: var(--bg);
+  }
+  form.ajanlat input:focus, form.ajanlat select:focus, form.ajanlat textarea:focus {
+    outline: 2px solid var(--navy); border-color: var(--navy);
+  }
+  form.ajanlat .telso { grid-column: 1 / -1; }
+  #visszajelzes { grid-column: 1 / -1; color: var(--navy); font-weight: 600; min-height: 22px; margin: 0; }
+
+  .gyik details {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 18px; margin-bottom: 10px;
+  }
+  .gyik summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+  .gyik p { color: var(--mut); margin: 10px 0 2px; font-size: 14px; }
+
+  footer {
+    margin-top: 56px; background: var(--navy2); color: #b9c6d6; padding: 30px 0 42px; font-size: 13.5px;
+  }
+  footer a { color: var(--arany); }
+  footer .sor { margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="#">OVI Rendezvényház<small>Terembérlés</small></a>
+  <span class="demobadge">DEMO</span>
+  <div class="menu">
+    <a href="#termek">Termeink</a>
+    <a href="#arak">Árak</a>
+    <a href="#folyamat">Foglalás menete</a>
+    <a href="#ajanlat">Ajánlatkérés</a>
+    <a href="#gyik">GYIK</a>
+  </div>
+</div></nav>
+
+<header class="fej"><div class="wrap">
+  <h1>Rendezvényhelyszín és próbatermek Józsefváros szívében</h1>
+  <p>Céges rendezvények, workshopok, magánünnepek és zenekari próbák számára
+  kínálunk tereket egy különleges hangulatú, egykori óvodaépületben — korszerű
+  technikával, rugalmas időbeosztással, átlátható árakon.</p>
+  <a class="gomb" href="#ajanlat">Ajánlatot kérek</a>
+  <a class="gomb korvonal" href="#termek">Termeink megtekintése</a>
+</div></header>
+
+<section id="termek"><div class="wrap">
+  <h2>Termeink</h2>
+  <p class="alcim">Minden terem önállóan vagy kombinálva is bérelhető.</p>
+  <div class="termek">
+    <div class="terem"><div class="kep">🎪</div><div class="tartalom">
+      <h3>Rendezvényterem</h3>
+      <p class="lead">Reprezentatív nagyterem színpaddal — konferenciára, céges
+      eseményre, koncertre, esküvőre.</p>
+      <table class="spec">
+        <tr><td>Alapterület</td><td>250 m²</td></tr>
+        <tr><td>Kapacitás</td><td>250 fő álló · 120 fő színházi · 80 fő bankett</td></tr>
+        <tr><td>Technika</td><td>színpad (6×4 m), hang- és fénytechnika, projektor + vászon</td></tr>
+        <tr><td>Kiegészítők</td><td>mobil bárpult, ruhatár, backstage</td></tr>
+      </table>
+      <button class="gomb foglalo" type="button">Időpontot foglalok</button>
+    </div></div>
+    <div class="terem"><div class="kep">🪑</div><div class="tartalom">
+      <h3>Kisterem</h3>
+      <p class="lead">Világos terem workshopra, tréningre, tanfolyamra, közösségi
+      alkalmakra.</p>
+      <table class="spec">
+        <tr><td>Alapterület</td><td>60 m²</td></tr>
+        <tr><td>Kapacitás</td><td>40 fő színházi · 24 fő U-alak</td></tr>
+        <tr><td>Technika</td><td>projektor, flipchart, hangosítás</td></tr>
+        <tr><td>Kiegészítők</td><td>kávésarok, mobil falak</td></tr>
+      </table>
+      <button class="gomb foglalo" type="button">Időpontot foglalok</button>
+    </div></div>
+    <div class="terem"><div class="kep">🥁</div><div class="tartalom">
+      <h3>Zenekari próbaterem</h3>
+      <p class="lead">Hangszigetelt próbaterem teljes backline-nal, órabérben vagy
+      havi bérlettel.</p>
+      <table class="spec">
+        <tr><td>Alapterület</td><td>35 m²</td></tr>
+        <tr><td>Felszerelés</td><td>dobfelszerelés, gitár- és basszuserősítő, PA + mikrofonok</td></tr>
+        <tr><td>Extra</td><td>cucclerakat bérlőknek, éjszakai sáv</td></tr>
+      </table>
+      <button class="gomb foglalo" type="button">Időpontot foglalok</button>
+    </div></div>
+    <div class="terem"><div class="kep">🌳</div><div class="tartalom">
+      <h3>Udvar</h3>
+      <p class="lead">400 m²-es zárt udvar nyári rendezvényekhez, családi és céges
+      napokhoz, szülinapokhoz.</p>
+      <table class="spec">
+        <tr><td>Alapterület</td><td>400 m²</td></tr>
+        <tr><td>Kapacitás</td><td>300 fő</td></tr>
+        <tr><td>Kiegészítők</td><td>kerti bútorok, sörpadok, árnyékolás, kültéri áram</td></tr>
+      </table>
+      <button class="gomb foglalo" type="button">Időpontot foglalok</button>
+    </div></div>
+  </div>
+</div></section>
+
+<section id="arak"><div class="wrap">
+  <h2>Áraink</h2>
+  <p class="alcim">Átlátható, rejtett költségek nélkül. Az árak az áfát tartalmazzák. <em>(Demo-árak.)</em></p>
+  <table class="arak">
+    <tr><th>Terem</th><th>Órabér</th><th>Félnap (4 óra)</th><th>Egész nap (10 óra)</th></tr>
+    <tr><td>Rendezvényterem</td><td class="ar">25 000 Ft</td><td class="ar">85 000 Ft</td><td class="ar">150 000 Ft</td></tr>
+    <tr><td>Kisterem</td><td class="ar">8 000 Ft</td><td class="ar">28 000 Ft</td><td class="ar">55 000 Ft</td></tr>
+    <tr><td>Próbaterem</td><td class="ar">4 000 Ft</td><td class="ar">—</td><td class="ar">havi bérlet: 45 000 Ft</td></tr>
+    <tr><td>Udvar</td><td class="ar">15 000 Ft</td><td class="ar">50 000 Ft</td><td class="ar">90 000 Ft</td></tr>
+  </table>
+  <p class="megjegyz">Technikus, takarítás és beléptetés igény szerint, egyedi ajánlat alapján.</p>
+  <div class="kedvezmeny">🤝 <strong>Civil szervezeteknek és közösségi programoknak 30%
+  kedvezményt adunk</strong> — kérj ajánlatot, és jelezd, hogy civil szervezet vagy!</div>
+</div></section>
+
+<section id="folyamat"><div class="wrap">
+  <h2>A foglalás menete</h2>
+  <p class="alcim">Három egyszerű lépés az eseményedig.</p>
+  <div class="lepesek">
+    <div class="lepes"><div class="szam">1</div><h3>Időpont és ajánlat</h3>
+      <p>Nézd meg a szabad időpontokat az online naptárban, vagy kérj ajánlatot az
+      űrlapon — 2 munkanapon belül válaszolunk.</p></div>
+    <div class="lepes"><div class="szam">2</div><h3>Egyeztetés és szerződés</h3>
+      <p>Bejárás a helyszínen, részletek pontosítása, majd bérleti szerződés és
+      díjbekérő.</p></div>
+    <div class="lepes"><div class="szam">3</div><h3>Rendezvény</h3>
+      <p>A megbeszélt időben minden készen áll — technikával, kapcsolattartóval,
+      igény szerint technikussal.</p></div>
+  </div>
+</div></section>
+
+<section id="ajanlat"><div class="wrap">
+  <h2>Ajánlatkérés</h2>
+  <p class="alcim">Írd meg, mit terveztek — hamarosan jelentkezünk. <em>(Demo-űrlap, nem küld semmit.)</em></p>
+  <form class="ajanlat" id="ajanlatform">
+    <div><label for="anev">Név / szervezet</label><input id="anev" required></div>
+    <div><label for="aemail">E-mail</label><input id="aemail" type="email" required></div>
+    <div><label for="aterem">Melyik terem?</label>
+      <select id="aterem"><option>Rendezvényterem</option><option>Kisterem</option>
+      <option>Próbaterem</option><option>Udvar</option><option>Több terem / az egész ház</option></select></div>
+    <div><label for="adatum">Tervezett időpont</label><input id="adatum" type="date"></div>
+    <div class="telso"><label for="auzenet">Mit terveztek? (esemény jellege, létszám, igények)</label>
+      <textarea id="auzenet" rows="4"></textarea></div>
+    <p id="visszajelzes"></p>
+    <div class="telso"><button class="gomb" type="submit">Ajánlatkérés elküldése</button></div>
+  </form>
+</div></section>
+
+<section id="gyik"><div class="wrap gyik">
+  <h2>Gyakori kérdések</h2>
+  <p class="alcim">&nbsp;</p>
+  <details><summary>Hozhatunk saját catering-et?</summary>
+    <p>Igen, külső catering fogadására alkalmas előkészítő terünk van; a részleteket
+    a szerződésben rögzítjük. Italszervizt a házon belül biztosítunk.</p></details>
+  <details><summary>Meddig tarthat az esemény?</summary>
+    <p>Beltéri rendezvény hétköznap 23:00-ig, hétvégén 24:00-ig; az udvaron a kerületi
+    szabályozás szerint 22:00-ig szólhat hangosított program.</p></details>
+  <details><summary>Van parkolási lehetőség?</summary>
+    <p>Az utcában fizetős közterületi parkolás működik; rakodásra a kapubejáró
+    használható, előre egyeztetve.</p></details>
+  <details><summary>Mi történik lemondás esetén?</summary>
+    <p>14 napon túli lemondásnál a foglaló teljes összegét visszatérítjük, ezen belül
+    átfoglalást biztosítunk egy későbbi időpontra.</p></details>
+</div></section>
+
+<footer><div class="wrap">
+  <strong style="color:#fff;">OVI Rendezvényház</strong> · 1084 Budapest, Példa utca 8. (demo-cím)
+  <div class="sor">berles@ovi-demo.hu · +36 1 234 5678 (demo-elérhetőségek)</div>
+  <div class="sor">Üzemeltető: OVI Nonprofit Kft. (demo) · A közösségi oldalunk:
+    <a href="../kulso/">ovi – programok és bulik</a></div>
+  <div class="sor"><strong>DEMO / látványterv</strong> — minden adat, ár és elérhetőség kitalált.
+    A foglalás-gombok helyén élesben Calendly/Cal.com-beágyazás működne.</div>
+</div></footer>
+
+<script>
+(function () {
+  "use strict";
+  function demoGomb(gomb, szoveg) {
+    var eredeti = gomb.textContent;
+    gomb.textContent = szoveg; gomb.disabled = true;
+    setTimeout(function () { gomb.textContent = eredeti; gomb.disabled = false; }, 1500);
+  }
+  document.querySelectorAll(".foglalo").forEach(function (g) {
+    g.addEventListener("click", function () {
+      demoGomb(g, "Demo — itt nyílna a foglalónaptár");
+    });
+  });
+  document.getElementById("ajanlatform").addEventListener("submit", function (e) {
+    e.preventDefault();
+    document.getElementById("visszajelzes").textContent =
+      "✓ Demo: éles oldalon itt menne el az ajánlatkérés — köszönjük!";
+  });
+})();
+</script>
+</body>
+</html>
