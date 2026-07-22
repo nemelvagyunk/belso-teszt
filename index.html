@@ -114,8 +114,12 @@
     border-radius: 12px; background: var(--card);
   }
 
-  /* ---- heti meeting szervező + saját meetingek ---- */
-  #meetingnezet, #sajatnezet { display: none; }
+  /* ---- heti meeting szervező + saját meetingek + készletek ---- */
+  #meetingnezet, #sajatnezet, #keszletnezet { display: none; }
+  table.keszlet td, table.keszlet th { padding: 7px 8px; font-size: 13.5px; }
+  table.keszlet td:first-child { text-align: left; }
+  .fogyoban { color: #a01d1d; font-weight: 700; }
+  .rendben { color: #1e7a3a; }
   .ecsetek { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
   .ecsetek .cimke { color: var(--mut); font-size: 13px; }
   .ecset {
@@ -176,7 +180,8 @@
     <button type="submit" class="belepes">Belépés</button>
     <div class="demo">
       Teszt-fiókok: <code>attila</code> / <code>teszt123</code> / 🐞 &nbsp;·&nbsp;
-      <code>vendeg</code> / <code>vendeg</code> / 🍎
+      <code>vendeg</code> / <code>vendeg</code> / 🍎 &nbsp;·&nbsp;
+      <code>uzletvezeto</code> / <code>bolt123</code> / 🦋
     </div>
   </form>
 </div>
@@ -205,6 +210,9 @@
     <button class="doboz" id="sajatmeeting" type="button" style="grid-column: span 2;">
       <h2>📌 Heti meetingjeim</h2>
       <p>A következő két hét lefixált meeting-időpontjai — kattints a listához.</p></button>
+    <button class="doboz" id="keszletek" type="button" style="grid-column: span 2; display: none;">
+      <h2>📦 Készletek</h2>
+      <p>Raktár- és pultkészlet áttekintés — csak a tulajdonos és az üzletvezető látja.</p></button>
   </div>
 
   <div id="doknezet">
@@ -226,6 +234,19 @@
         <a class="dokword" href="dokumentumok/40dryszoveg.docx" download>Word ⬇</a>
       </li>
     </ul>
+  </div>
+
+  <div id="keszletnezet">
+    <div class="fejlec">
+      <button id="keszletvissza" type="button">← Vissza</button>
+      <h2>📦 Készletek</h2>
+      <span style="color:var(--mut);font-size:13px;">minta-adatok · élesben csak a tulajdonos és az üzletvezető éri el</span>
+    </div>
+    <div class="hetkartya">
+      <table class="meeting keszlet">
+        <tr><th style="text-align:left;padding:6px 8px;">Tétel</th><th>Készlet</th><th>Min.</th><th>Állapot</th></tr>
+      </table>
+    </div>
   </div>
 
   <div id="sajatnezet">
@@ -281,9 +302,12 @@
   //   crypto.subtle.digest("SHA-256", new TextEncoder().encode("UJJELSZO"))
   //     .then(b => console.log([...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("")))
   var FELHASZNALOK = {
-    "attila": { hash: "84705490f0b38f4cf505c9313ef1ffb9478cee73388b2a2d1e1d1c29a0e3d935", jel: "🐞" }, // teszt123
-    "vendeg": { hash: "cdeae1a6b106e49b55f45bbe641dac0346d461e00d7b09388afa3f81444d44ff", jel: "🍎" }  // vendeg
+    "attila":      { hash: "84705490f0b38f4cf505c9313ef1ffb9478cee73388b2a2d1e1d1c29a0e3d935", jel: "🐞", szerep: "tulajdonos" },   // teszt123
+    "uzletvezeto": { hash: "8fcef2ca6876c392095d4ab17596ba3b7faeb873f7e2259267f8337c2f4dfe1e", jel: "🦋", szerep: "üzletvezető" },  // bolt123
+    "vendeg":      { hash: "cdeae1a6b106e49b55f45bbe641dac0346d461e00d7b09388afa3f81444d44ff", jel: "🍎", szerep: "tag" }           // vendeg
   };
+  // Ezek a szerepek látják a Készletek kártyát (élesben: üzletvezető + tulajdonos)
+  var KESZLET_SZEREPEK = ["tulajdonos", "üzletvezető"];
 
   var bejelentkezve = null;     // csak memóriában — újratöltésnél újra kér
   var valasztottJel = null;
@@ -340,7 +364,10 @@
         document.getElementById("belso").style.display = "block";
         document.getElementById("udv").innerHTML =
           "Bejelentkezve: <span class='sajatjel'>" + f.jel + "</span> " + nev +
-          " · " + new Date().toLocaleDateString("hu-HU");
+          " (" + f.szerep + ") · " + new Date().toLocaleDateString("hu-HU");
+        // szerepkör-függő kártyák
+        document.getElementById("keszletek").style.display =
+          KESZLET_SZEREPEK.indexOf(f.szerep) !== -1 ? "" : "none";
       } else {
         hiba("Hibás név, jelszó vagy ovis jel.");
         document.getElementById("jelszo").value = "";
@@ -541,6 +568,42 @@
     document.getElementById("racs").style.display = "grid";
   });
 
+  // ---- Készletek (minta-adatok; élesben adatbázisból + szerepkör-védelemmel) ----
+  var KESZLET = [
+    { tetel: "Kávé (szemes, kg)",        menny: 6,  min: 2 },
+    { tetel: "Tea (doboz)",              menny: 9,  min: 4 },
+    { tetel: "Üdítő (rekesz)",           menny: 3,  min: 4 },
+    { tetel: "Csapolt sör (hordó)",      menny: 2,  min: 2 },
+    { tetel: "Papírpohár (csomag)",      menny: 14, min: 5 },
+    { tetel: "Szalvéta (csomag)",        menny: 2,  min: 6 },
+    { tetel: "Kézfertőtlenítő (flakon)", menny: 5,  min: 2 }
+  ];
+
+  function keszletJogosult() {
+    var f = FELHASZNALOK[bejelentkezve];
+    return !!(f && KESZLET_SZEREPEK.indexOf(f.szerep) !== -1);
+  }
+
+  document.getElementById("keszletek").addEventListener("click", function () {
+    if (!keszletJogosult()) return;       // dupla védelem a rejtés mellett
+    var tabla = document.querySelector("table.keszlet");
+    tabla.querySelectorAll("tr:not(:first-child)").forEach(function (s) { s.remove(); });
+    KESZLET.forEach(function (k) {
+      var fogyoban = k.menny <= k.min;
+      var sor = document.createElement("tr");
+      sor.innerHTML = "<td>" + k.tetel + "</td><td>" + k.menny + "</td><td>" + k.min +
+        "</td><td class='" + (fogyoban ? "fogyoban" : "rendben") + "'>" +
+        (fogyoban ? "⚠ fogyóban" : "✓ rendben") + "</td>";
+      tabla.appendChild(sor);
+    });
+    document.getElementById("racs").style.display = "none";
+    document.getElementById("keszletnezet").style.display = "block";
+  });
+  document.getElementById("keszletvissza").addEventListener("click", function () {
+    document.getElementById("keszletnezet").style.display = "none";
+    document.getElementById("racs").style.display = "grid";
+  });
+
   document.getElementById("kilep").addEventListener("click", function () {
     bejelentkezve = null;
     valasztottJel = null;
@@ -552,6 +615,8 @@
     document.getElementById("doknezet").style.display = "none";
     document.getElementById("meetingnezet").style.display = "none";
     document.getElementById("sajatnezet").style.display = "none";
+    document.getElementById("keszletnezet").style.display = "none";
+    document.getElementById("keszletek").style.display = "none";
     document.getElementById("racs").style.display = "grid";
     document.getElementById("kapu").style.display = "flex";
     document.getElementById("nev").value = "";
