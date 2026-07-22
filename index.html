@@ -23,7 +23,7 @@
   }
   .login {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-    padding: 30px 28px; width: 100%; max-width: 360px;
+    padding: 30px 28px; width: 100%; max-width: 400px;
     box-shadow: 0 6px 30px rgba(20,30,50,.08);
   }
   .login h1 { margin: 0 0 2px; font-size: 22px; letter-spacing: -.02em; }
@@ -34,11 +34,21 @@
     border-radius: 8px; font: inherit; background: var(--bg);
   }
   .login input:focus { outline: 2px solid var(--acc); outline-offset: 1px; border-color: var(--acc); }
-  .login button {
+  .jelek { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 4px; }
+  .jelek button {
+    font-size: 26px; padding: 8px 0; background: var(--bg); cursor: pointer;
+    border: 2px solid var(--line); border-radius: 10px; line-height: 1;
+  }
+  .jelek button:hover { border-color: var(--acc); }
+  .jelek button[aria-pressed="true"] {
+    border-color: var(--acc); background: var(--acc-soft);
+    box-shadow: 0 0 0 2px var(--acc-soft);
+  }
+  .login button.belepes {
     width: 100%; margin-top: 18px; padding: 11px; font: inherit; font-weight: 600;
     background: var(--acc); color: #fff; border: 0; border-radius: 8px; cursor: pointer;
   }
-  .login button:hover { filter: brightness(1.1); }
+  .login button.belepes:hover { filter: brightness(1.1); }
   #hibauzenet { color: var(--hiba); font-size: 13.5px; min-height: 20px; margin: 10px 0 0; }
   .demo {
     margin-top: 18px; padding: 10px 12px; background: var(--acc-soft);
@@ -52,25 +62,49 @@
   }
 
   /* ---- belső oldal ---- */
-  #belso { display: none; max-width: 880px; margin: 0 auto; padding: 24px 16px 60px; }
+  #belso { display: none; max-width: 1100px; margin: 0 auto; padding: 24px 16px 60px; }
   #belso header {
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 10px; margin-bottom: 20px;
   }
   #belso h1 { margin: 0; font-size: 24px; letter-spacing: -.02em; }
   #udv { color: var(--mut); font-size: 14px; }
+  #udv .sajatjel { font-size: 18px; }
   #kilep {
     padding: 8px 16px; font: inherit; background: var(--card); color: var(--ink);
     border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
   }
   #kilep:hover { border-color: var(--acc); color: var(--acc); }
-  .racs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+
+  .racs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .racs { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .racs { grid-template-columns: 1fr; } }
   .doboz {
     background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    padding: 16px;
+    padding: 16px; text-align: left; font: inherit; color: var(--ink);
   }
   .doboz h2 { margin: 0 0 6px; font-size: 16px; }
   .doboz p { margin: 0; color: var(--mut); font-size: 13.5px; }
+  button.doboz { cursor: pointer; }
+  button.doboz:hover { border-color: var(--acc); box-shadow: 0 2px 12px rgba(29,95,191,.12); }
+
+  /* ---- beágyazott radar ---- */
+  #radarnezet { display: none; }
+  #radarnezet .fejlec {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;
+  }
+  #vissza {
+    padding: 8px 16px; font: inherit; background: var(--card); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
+  }
+  #vissza:hover { border-color: var(--acc); color: var(--acc); }
+  #radarnezet h2 { margin: 0; font-size: 18px; }
+  #radarnezet a { color: var(--acc); font-size: 13px; }
+  #radarframe {
+    width: 100%; height: 78vh; border: 1px solid var(--line);
+    border-radius: 12px; background: var(--card);
+  }
+
   .figyelm {
     margin-top: 26px; padding: 12px 14px; border: 1px dashed var(--line);
     border-radius: 10px; color: var(--mut); font-size: 12.5px;
@@ -87,11 +121,13 @@
     <input id="nev" type="text" required autofocus>
     <label for="jelszo">Jelszó</label>
     <input id="jelszo" type="password" required>
+    <label>Az ovis jeled</label>
+    <div class="jelek" id="jelek"></div>
     <p id="hibauzenet"></p>
-    <button type="submit">Belépés</button>
+    <button type="submit" class="belepes">Belépés</button>
     <div class="demo">
-      Teszt-fiókok: <code>attila</code> / <code>teszt123</code> &nbsp;·&nbsp;
-      <code>vendeg</code> / <code>vendeg</code>
+      Teszt-fiókok: <code>attila</code> / <code>teszt123</code> / 🐞 &nbsp;·&nbsp;
+      <code>vendeg</code> / <code>vendeg</code> / 🍎
     </div>
   </form>
 </div>
@@ -104,16 +140,28 @@
     </div>
     <button id="kilep">Kilépés</button>
   </header>
-  <div class="racs">
+
+  <div class="racs" id="racs">
     <div class="doboz"><h2>📄 Dokumentumok</h2>
       <p>Alapszabály, szerződés-sablonok, engedélyek — ide kerülnének a belső anyagok.</p></div>
     <div class="doboz"><h2>📅 Naptár</h2>
       <p>Próbatermi beosztás, rendezvénynaptár, határidők.</p></div>
-    <div class="doboz"><h2>📡 Pályázatok</h2>
-      <p>A pályázatradar szűrt nézete — csak ami tényleg rátok vonatkozik.</p></div>
+    <button class="doboz" id="palyazatok" type="button"><h2>📡 Pályázatok</h2>
+      <p>A pályázatradar itt, beágyazva — kattints a megnyitáshoz.</p></button>
     <div class="doboz"><h2>💬 Faliújság</h2>
       <p>Belső hírek, teendők, ki mit vállalt.</p></div>
   </div>
+
+  <div id="radarnezet">
+    <div class="fejlec">
+      <button id="vissza" type="button">← Vissza</button>
+      <h2>📡 Pályázatradar</h2>
+      <a href="https://nemelvagyunk.github.io/palyazatradar/" target="_blank"
+         rel="noopener">megnyitás új lapon ↗</a>
+    </div>
+    <iframe id="radarframe" title="Pályázatradar" loading="lazy"></iframe>
+  </div>
+
   <p class="figyelm">⚠️ Ez egy kliensoldali teszt-beléptető: kényelmes kapu, de nem valódi
   biztonsági védelem — érzékeny adat ilyen mögé nem való. Az éles belső oldalhoz
   szerveroldali bejelentkezés kell majd (pl. Cloudflare Access / Firebase Auth).</p>
@@ -123,16 +171,37 @@
 (function () {
   "use strict";
 
-  // Felhasználók: {név: SHA-256(jelszó) hex}. Új jelszó-hash készítése a
-  // böngésző konzoljában:
+  var RADAR_URL = "https://nemelvagyunk.github.io/palyazatradar/";
+
+  // A választható ovis jelek (kezdetben 8; bővíthető)
+  var JELEK = ["🍎", "🐞", "🦋", "☀️", "🐰", "🍄", "⭐", "🐟"];
+
+  // Felhasználók: {név: {hash: SHA-256(jelszó) hex, jel: ovis jel}}.
+  // Új jelszó-hash készítése a böngésző konzoljában:
   //   crypto.subtle.digest("SHA-256", new TextEncoder().encode("UJJELSZO"))
   //     .then(b => console.log([...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("")))
   var FELHASZNALOK = {
-    "attila": "84705490f0b38f4cf505c9313ef1ffb9478cee73388b2a2d1e1d1c29a0e3d935", // teszt123
-    "vendeg": "cdeae1a6b106e49b55f45bbe641dac0346d461e00d7b09388afa3f81444d44ff"  // vendeg
+    "attila": { hash: "84705490f0b38f4cf505c9313ef1ffb9478cee73388b2a2d1e1d1c29a0e3d935", jel: "🐞" }, // teszt123
+    "vendeg": { hash: "cdeae1a6b106e49b55f45bbe641dac0346d461e00d7b09388afa3f81444d44ff", jel: "🍎" }  // vendeg
   };
 
-  var bejelentkezve = null;   // csak memóriában — újratöltésnél újra kér
+  var bejelentkezve = null;     // csak memóriában — újratöltésnél újra kér
+  var valasztottJel = null;
+
+  // jel-választó felépítése
+  var jelekDiv = document.getElementById("jelek");
+  JELEK.forEach(function (j) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = j; b.setAttribute("aria-pressed", "false");
+    b.setAttribute("aria-label", "ovis jel: " + j);
+    b.addEventListener("click", function () {
+      valasztottJel = j;
+      jelekDiv.querySelectorAll("button").forEach(function (x) {
+        x.setAttribute("aria-pressed", x === b ? "true" : "false");
+      });
+    });
+    jelekDiv.appendChild(b);
+  });
 
   function hex(buf) {
     return Array.prototype.map.call(new Uint8Array(buf), function (x) {
@@ -147,33 +216,61 @@
   var form = document.getElementById("loginform");
   var hibae = document.getElementById("hibauzenet");
 
+  function hiba(uzenet) {
+    hibae.textContent = uzenet;
+    form.classList.remove("razas");
+    void form.offsetWidth;              // animáció újraindítása
+    form.classList.add("razas");
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var nev = document.getElementById("nev").value.trim().toLowerCase();
     var jelszo = document.getElementById("jelszo").value;
+    if (!valasztottJel) {
+      hiba("Válaszd ki az ovis jeled is!");
+      return;
+    }
     sha256(jelszo).then(function (h) {
-      if (FELHASZNALOK[nev] && FELHASZNALOK[nev] === h) {
+      var f = FELHASZNALOK[nev];
+      if (f && f.hash === h && f.jel === valasztottJel) {
         bejelentkezve = nev;
         hibae.textContent = "";
         document.getElementById("kapu").style.display = "none";
         document.getElementById("belso").style.display = "block";
-        document.getElementById("udv").textContent =
-          "Bejelentkezve: " + nev + " · " + new Date().toLocaleDateString("hu-HU");
+        document.getElementById("udv").innerHTML =
+          "Bejelentkezve: <span class='sajatjel'>" + f.jel + "</span> " + nev +
+          " · " + new Date().toLocaleDateString("hu-HU");
       } else {
-        hibae.textContent = "Hibás felhasználónév vagy jelszó.";
+        hiba("Hibás név, jelszó vagy ovis jel.");
         document.getElementById("jelszo").value = "";
-        form.classList.remove("razas");
-        void form.offsetWidth;            // animáció újraindítása
-        form.classList.add("razas");
       }
     }).catch(function () {
-      hibae.textContent = "A jelszó-ellenőrzés nem érhető el ebben a böngészőben.";
+      hiba("A jelszó-ellenőrzés nem érhető el ebben a böngészőben.");
     });
+  });
+
+  // Pályázatok kártya → beágyazott radar
+  document.getElementById("palyazatok").addEventListener("click", function () {
+    var frame = document.getElementById("radarframe");
+    if (!frame.src) frame.src = RADAR_URL;   // csak első megnyitáskor tölt
+    document.getElementById("racs").style.display = "none";
+    document.getElementById("radarnezet").style.display = "block";
+  });
+  document.getElementById("vissza").addEventListener("click", function () {
+    document.getElementById("radarnezet").style.display = "none";
+    document.getElementById("racs").style.display = "grid";
   });
 
   document.getElementById("kilep").addEventListener("click", function () {
     bejelentkezve = null;
+    valasztottJel = null;
+    jelekDiv.querySelectorAll("button").forEach(function (x) {
+      x.setAttribute("aria-pressed", "false");
+    });
     document.getElementById("belso").style.display = "none";
+    document.getElementById("radarnezet").style.display = "none";
+    document.getElementById("racs").style.display = "grid";
     document.getElementById("kapu").style.display = "flex";
     document.getElementById("nev").value = "";
     document.getElementById("jelszo").value = "";

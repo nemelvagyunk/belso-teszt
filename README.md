@@ -5,4 +5,5 @@ Egy későbbi, rendes belső oldal előtanulmánya — érzékeny adat nincs és
 legyen benne, a kliensoldali kapu nem valódi biztonsági védelem.
 
 Oldal: https://nemelvagyunk.github.io/belso-teszt/
-Teszt-fiókok: `attila` / `teszt123` · `vendeg` / `vendeg`
+Teszt-fiókok: `attila` / `teszt123` / 🐞 · `vendeg` / `vendeg` / 🍎
+(belépéskor az ovis jeledet is ki kell választani a 8 közül)
