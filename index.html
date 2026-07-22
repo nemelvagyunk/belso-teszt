@@ -114,6 +114,46 @@
     border-radius: 12px; background: var(--card);
   }
 
+  /* ---- heti meeting szervező ---- */
+  #meetingnezet { display: none; }
+  .ecsetek { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+  .ecsetek .cimke { color: var(--mut); font-size: 13px; }
+  .ecset {
+    padding: 8px 14px; font: inherit; border-radius: 8px; cursor: pointer;
+    border: 2px solid var(--line); background: var(--card);
+  }
+  .ecset.zold { color: #1e7a3a; }
+  .ecset.piros { color: #a01d1d; }
+  .ecset[aria-pressed="true"].zold { border-color: #1e7a3a; background: #e4f4e8; }
+  .ecset[aria-pressed="true"].piros { border-color: #a01d1d; background: #fdeaea; }
+  .hetek { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 900px) { .hetek { grid-template-columns: 1fr; } }
+  .hetkartya {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px;
+  }
+  .hetkartya .hetfej {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+  }
+  .hetkartya h3 { margin: 0; font-size: 15px; }
+  .hetkartya .torles {
+    font: inherit; font-size: 12px; color: var(--mut); background: none;
+    border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer;
+  }
+  .hetkartya .torles:hover { color: var(--acc); border-color: var(--acc); }
+  table.meeting { border-collapse: collapse; width: 100%; user-select: none; }
+  table.meeting th, table.meeting td {
+    border: 1px solid var(--line); text-align: center; font-size: 11.5px; padding: 0;
+  }
+  table.meeting th { background: var(--bg); color: var(--mut); padding: 5px 2px; font-weight: 600; }
+  table.meeting th.ora { width: 44px; }
+  table.meeting td.ora { color: var(--mut); background: var(--bg); padding: 0 4px; white-space: nowrap; }
+  table.meeting td.sav { height: 26px; cursor: pointer; }
+  td.sav.ok  { background: #cdeed6; }
+  td.sav.ok:hover { background: #b4e3c1; }
+  td.sav.nem { background: #f6c2c2; }
+  td.sav.nem:hover { background: #efa8a8; }
+
   .figyelm {
     margin-top: 26px; padding: 12px 14px; border: 1px dashed var(--line);
     border-radius: 10px; color: var(--mut); font-size: 12.5px;
@@ -159,6 +199,9 @@
       <p>A pályázatradar itt, beágyazva — kattints a megnyitáshoz.</p></button>
     <div class="doboz"><h2>💬 Faliújság</h2>
       <p>Belső hírek, teendők, ki mit vállalt.</p></div>
+    <button class="doboz" id="meeting" type="button" style="grid-column: 1 / -1;">
+      <h2>🗓️ Heti meeting szervező</h2>
+      <p>Jelöld be, mikor érsz rá ezen és a jövő héten (H–P, 10:00–20:00) — kattints a megnyitáshoz.</p></button>
   </div>
 
   <div id="doknezet">
@@ -180,6 +223,21 @@
         <a class="dokword" href="dokumentumok/40dryszoveg.docx" download>Word ⬇</a>
       </li>
     </ul>
+  </div>
+
+  <div id="meetingnezet">
+    <div class="fejlec">
+      <button id="meetingvissza" type="button">← Vissza</button>
+      <h2>🗓️ Heti meeting szervező</h2>
+      <span id="meetinguser" style="color:var(--mut);font-size:13px;"></span>
+    </div>
+    <div class="ecsetek">
+      <span class="cimke">Jelölés:</span>
+      <button class="ecset zold" id="ecsetzold" type="button" aria-pressed="false">🟢 Ráérek</button>
+      <button class="ecset piros" id="ecsetpiros" type="button" aria-pressed="true">🔴 Nem érek rá</button>
+      <span class="cimke">— kattints vagy húzd végig a sávokon; alapból minden zöld (ráérsz)</span>
+    </div>
+    <div class="hetek" id="hetek"></div>
   </div>
 
   <div id="radarnezet">
@@ -302,6 +360,136 @@
     document.getElementById("racs").style.display = "grid";
   });
 
+  // ---- Heti meeting szervező ----
+  var NAPOK = ["H", "K", "Sze", "Cs", "P"];
+  var ORA_TOL = 10, ORA_IG = 20;          // 10:00–20:00, óránkénti sávok
+  var ecset = "nem";                       // alapból a pirossal jelölsz (minden zöld)
+  var fest = false;                        // egérgomb lenyomva → húzva festés
+
+  function hetfo(eltolasHet) {             // az adott hét hétfője (H a hét első napja)
+    var d = new Date();
+    d.setHours(12, 0, 0, 0);
+    d.setDate(d.getDate() - ((d.getDay() + 6) % 7) + eltolasHet * 7);
+    return d;
+  }
+
+  function datumcimke(d) {
+    return String(d.getMonth() + 1).padStart(2, "0") + "." +
+           String(d.getDate()).padStart(2, "0") + ".";
+  }
+
+  function tarolokulcs(hetIdx) {
+    var h = hetfo(hetIdx);
+    return "meeting_" + (bejelentkezve || "?") + "_" +
+           h.getFullYear() + "-" + datumcimke(h);
+  }
+
+  function mentes(hetIdx, tabla) {
+    var pirosak = [];
+    tabla.querySelectorAll("td.sav.nem").forEach(function (c) {
+      pirosak.push(c.dataset.nap + "-" + c.dataset.ora);
+    });
+    try { localStorage.setItem(tarolokulcs(hetIdx), JSON.stringify(pirosak)); }
+    catch (e) { /* privát mód stb. — ilyenkor csak a memóriában él */ }
+  }
+
+  function betoltes(hetIdx) {
+    try { return JSON.parse(localStorage.getItem(tarolokulcs(hetIdx))) || []; }
+    catch (e) { return []; }
+  }
+
+  function savAllit(cella, allapot, hetIdx, tabla) {
+    cella.classList.remove("ok", "nem");
+    cella.classList.add(allapot);
+    mentes(hetIdx, tabla);
+  }
+
+  function hetTabla(hetIdx, cim) {
+    var kartya = document.createElement("div");
+    kartya.className = "hetkartya";
+    var h = hetfo(hetIdx);
+
+    var fej = document.createElement("div");
+    fej.className = "hetfej";
+    var cimEl = document.createElement("h3");
+    var pentek = new Date(h); pentek.setDate(h.getDate() + 4);
+    cimEl.textContent = cim + " (" + datumcimke(h) + "–" + datumcimke(pentek) + ")";
+    fej.appendChild(cimEl);
+    var torles = document.createElement("button");
+    torles.className = "torles"; torles.type = "button"; torles.textContent = "mind zöldre";
+    fej.appendChild(torles);
+    kartya.appendChild(fej);
+
+    var tabla = document.createElement("table");
+    tabla.className = "meeting";
+    var fejsor = document.createElement("tr");
+    fejsor.innerHTML = "<th class='ora'></th>" + NAPOK.map(function (n, i) {
+      var d = new Date(h); d.setDate(h.getDate() + i);
+      return "<th>" + n + "<br>" + datumcimke(d) + "</th>";
+    }).join("");
+    tabla.appendChild(fejsor);
+
+    var pirosak = betoltes(hetIdx);
+    for (var ora = ORA_TOL; ora < ORA_IG; ora++) {
+      var sor = document.createElement("tr");
+      var oc = document.createElement("td");
+      oc.className = "ora"; oc.textContent = ora + "–" + (ora + 1);
+      sor.appendChild(oc);
+      for (var nap = 0; nap < NAPOK.length; nap++) {
+        var c = document.createElement("td");
+        c.className = "sav " +
+          (pirosak.indexOf(nap + "-" + ora) !== -1 ? "nem" : "ok");
+        c.dataset.nap = nap; c.dataset.ora = ora;
+        c.title = NAPOK[nap] + " " + ora + ":00–" + (ora + 1) + ":00";
+        (function (cella) {
+          cella.addEventListener("mousedown", function (e) {
+            e.preventDefault(); fest = true;
+            savAllit(cella, ecset, hetIdx, tabla);
+          });
+          cella.addEventListener("mouseenter", function () {
+            if (fest) savAllit(cella, ecset, hetIdx, tabla);
+          });
+        })(c);
+        sor.appendChild(c);
+      }
+      tabla.appendChild(sor);
+    }
+    kartya.appendChild(tabla);
+
+    torles.addEventListener("click", function () {
+      tabla.querySelectorAll("td.sav").forEach(function (c) {
+        c.classList.remove("nem"); c.classList.add("ok");
+      });
+      mentes(hetIdx, tabla);
+    });
+    return kartya;
+  }
+
+  document.addEventListener("mouseup", function () { fest = false; });
+
+  function ecsetValt(melyik) {
+    ecset = melyik;
+    document.getElementById("ecsetzold").setAttribute("aria-pressed", melyik === "ok" ? "true" : "false");
+    document.getElementById("ecsetpiros").setAttribute("aria-pressed", melyik === "nem" ? "true" : "false");
+  }
+  document.getElementById("ecsetzold").addEventListener("click", function () { ecsetValt("ok"); });
+  document.getElementById("ecsetpiros").addEventListener("click", function () { ecsetValt("nem"); });
+
+  document.getElementById("meeting").addEventListener("click", function () {
+    var hetek = document.getElementById("hetek");
+    hetek.innerHTML = "";                          // frissen épül (user/hét szerint)
+    hetek.appendChild(hetTabla(0, "Ez a hét"));
+    hetek.appendChild(hetTabla(1, "Jövő hét"));
+    document.getElementById("meetinguser").textContent =
+      (bejelentkezve || "") + " jelölései — ebben a böngészőben mentve";
+    document.getElementById("racs").style.display = "none";
+    document.getElementById("meetingnezet").style.display = "block";
+  });
+  document.getElementById("meetingvissza").addEventListener("click", function () {
+    document.getElementById("meetingnezet").style.display = "none";
+    document.getElementById("racs").style.display = "grid";
+  });
+
   document.getElementById("kilep").addEventListener("click", function () {
     bejelentkezve = null;
     valasztottJel = null;
@@ -311,6 +499,7 @@
     document.getElementById("belso").style.display = "none";
     document.getElementById("radarnezet").style.display = "none";
     document.getElementById("doknezet").style.display = "none";
+    document.getElementById("meetingnezet").style.display = "none";
     document.getElementById("racs").style.display = "grid";
     document.getElementById("kapu").style.display = "flex";
     document.getElementById("nev").value = "";
