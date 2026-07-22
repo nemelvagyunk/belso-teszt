@@ -83,6 +83,11 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
   Később: saját foglaló a belső naptárra kötve.
 - Technika: statikus oldal (a radar/belso-teszt receptje) + beágyazások;
   az eseményadat JSON-ból, amit később a belső rendszer szerkeszt.
+- **Oldal-család** (egy márka, három hangnem, három célközönség, kereszt-linkekkel):
+  1) közösségi/programos oldal (bulis hangulat, próbaterem csak visszafogott
+  említés), 2) hivatalos terembérlés-oldal (üzleti stílus, árak, ajánlatkérés),
+  3) próbaterem mikro-oldal zenekaroknak (backline, sávok, házirend).
+  Demók: /kulso/, /berles/, /proba/ a belso-teszt repóban.
 
 ## Ovis jel
 

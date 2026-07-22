@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVI Próbaterem (demo)</title>
+<meta name="description" content="Hangszigetelt próbaterem backline-nal Józsefvárosban — 4000 Ft/óra, cucclerakat, éjszakai sáv. Demo oldal.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥁</text></svg>">
+<style>
+  :root {
+    --bg: #0e0e10; --panel: #17171b; --panel2: #1e1e24; --ink: #f4f2ec;
+    --mut: #98938a; --line: #2b2b33; --sav: #d7fb46; --sav-ink: #131503;
+    --piros: #ff5d5d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.6 ui-monospace, "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 18px; }
+  a { color: var(--sav); }
+
+  header {
+    padding: 60px 0 40px; border-bottom: 1px solid var(--line);
+    background: radial-gradient(600px 260px at 80% 0%, rgba(215,251,70,.08), transparent);
+  }
+  .cimke { color: var(--sav); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
+  h1 { margin: 8px 0 10px; font-size: clamp(30px, 6vw, 52px); line-height: 1.05;
+       letter-spacing: -.02em; text-transform: uppercase; }
+  h1 .ki { color: var(--sav); }
+  header p { color: var(--mut); max-width: 560px; margin: 0 0 24px; }
+  .gomb {
+    display: inline-block; padding: 12px 22px; border: 2px solid var(--sav);
+    background: var(--sav); color: var(--sav-ink); font: inherit; font-weight: 700;
+    cursor: pointer; text-decoration: none; text-transform: uppercase; font-size: 14px;
+    letter-spacing: .06em;
+  }
+  .gomb:hover { filter: brightness(1.08); }
+  .gomb.ures { background: transparent; color: var(--sav); margin-left: 10px; }
+  .gomb.ures:hover { background: rgba(215,251,70,.1); }
+
+  section { padding: 40px 0 10px; }
+  h2 { font-size: 20px; text-transform: uppercase; letter-spacing: .1em; color: var(--sav);
+       margin: 0 0 18px; }
+  h2::before { content: "// "; color: var(--mut); }
+
+  .racs2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 720px) { .racs2 { grid-template-columns: 1fr; } }
+  .doboz { background: var(--panel); border: 1px solid var(--line); padding: 20px; }
+  .doboz ul { margin: 0; padding-left: 20px; color: var(--mut); }
+  .doboz li { margin: 7px 0; }
+  .doboz li strong { color: var(--ink); }
+
+  table.arak { width: 100%; border-collapse: collapse; }
+  table.arak td { padding: 12px 4px; border-bottom: 1px dashed var(--line); }
+  table.arak td.ar { text-align: right; font-weight: 700; white-space: nowrap; }
+  table.arak td.megj { color: var(--mut); font-size: 13px; }
+
+  .savok { overflow-x: auto; }
+  table.het { border-collapse: collapse; width: 100%; min-width: 520px; }
+  table.het th, table.het td {
+    border: 1px solid var(--line); padding: 8px 6px; text-align: center; font-size: 13px;
+  }
+  table.het th { color: var(--mut); font-weight: 400; }
+  td.szabad { background: rgba(215,251,70,.12); color: var(--sav); cursor: pointer; }
+  td.szabad:hover { background: rgba(215,251,70,.25); }
+  td.foglalt { color: #5c5c66; text-decoration: line-through; }
+  .jelmagyarazat { color: var(--mut); font-size: 13px; margin-top: 10px; }
+
+  .hazirend li { margin: 9px 0; }
+
+  footer {
+    margin-top: 50px; border-top: 1px solid var(--line); padding: 26px 0 40px;
+    color: var(--mut); font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="cimke">OVI · Józsefváros · demo</div>
+  <h1>Próbaterem.<br><span class="ki">Backline-nal.</span></h1>
+  <p>Hangszigetelt terem egy volt óvoda pincéjében. Bedobod a cuccod, bedugod a
+  gitárt, nyomjátok. 4 000 Ft/óra, és a dobcucc már ott van.</p>
+  <button class="gomb foglalo" type="button">Sávot foglalok</button>
+  <a class="gomb ures" href="#savok">Szabad sávok</a>
+</div></header>
+
+<section><div class="wrap racs2">
+  <div class="doboz">
+    <h2>Backline</h2>
+    <ul>
+      <li><strong>Dobszett</strong> (lábgép, cintányérok — pergőt hozz)</li>
+      <li><strong>2× gitárkombó</strong> + <strong>basszuskombó</strong></li>
+      <li><strong>PA + 2 mikrofon</strong> énekhez</li>
+      <li>Kottaállványok, hosszabbítók, tartalék húr a pultnál</li>
+      <li>Léghűtés nyáron, fűtés télen — nem gyakorlunk kabátban</li>
+    </ul>
+  </div>
+  <div class="doboz">
+    <h2>Árak <span style="color:var(--mut);font-size:12px;">(demo)</span></h2>
+    <table class="arak">
+      <tr><td>Óradíj</td><td class="ar">4 000 Ft</td></tr>
+      <tr><td>10 órás bérlet</td><td class="ar">35 000 Ft</td></tr>
+      <tr><td>Havi fix sáv (heti 1×3 óra)</td><td class="ar">45 000 Ft</td></tr>
+      <tr><td>Cucclerakat bérlőknek</td><td class="ar">+5 000 Ft/hó</td></tr>
+      <tr><td class="megj" colspan="2">Éjszakai sáv (22:00 után) bérlőknek egyeztetéssel.</td></tr>
+    </table>
+  </div>
+</div></section>
+
+<section id="savok"><div class="wrap">
+  <h2>Szabad sávok ezen a héten</h2>
+  <div class="savok"><table class="het" id="hetitabla"></table></div>
+  <p class="jelmagyarazat">■ <span style="color:var(--sav)">szabad</span> ·
+    <s style="color:#5c5c66">foglalt</s> — kattints egy szabad sávra a foglaláshoz (demo)</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Házirend</h2>
+  <div class="doboz"><ul class="hazirend">
+    <li>A sávod akkor kezdődik, amikor kezdődik — a pakolás is benne van.</li>
+    <li>Cuccot a következő zenekar érkezéséig pakold el, vagy bérelj lerakatot.</li>
+    <li>A backline-t úgy add tovább, ahogy kaptad. Ami elszakad, szólj — pótoljuk, megbeszéljük.</li>
+    <li>Sört-üdítőt a pultról vihettek le. Saját pia no-go — ebből él a ház.</li>
+    <li>Fellépési lehetőség: a legjobban nyomó próbatermes zenekarok az OVI
+      színpadán mutatkozhatnak be. Ez nem vicc, ez a terv.</li>
+  </ul></div>
+</div></section>
+
+<footer><div class="wrap">
+  OVI Próbaterem · 1084 Budapest, Példa utca 8. (demo-cím) · proba@ovi-demo.hu<br><br>
+  <strong>DEMO / látványterv</strong> — minden adat kitalált. A foglalás élesben
+  Cal.com-naptárból menne. · <a href="../kulso/">programok és bulik</a> ·
+  <a href="../berles/">hivatalos terembérlés</a>
+</div></footer>
+
+<script>
+(function () {
+  "use strict";
+  var NAPOK = ["H", "K", "Sze", "Cs", "P", "Szo", "V"];
+  var SAVOK = ["10–13", "13–16", "16–19", "19–22"];
+  // kamu foglaltság: determinisztikus minta, hogy élethű legyen
+  var FOGLALT = { "0-2": 1, "0-3": 1, "1-3": 1, "2-1": 1, "2-3": 1, "3-0": 1,
+                  "4-2": 1, "4-3": 1, "5-3": 1 };
+
+  var t = document.getElementById("hetitabla");
+  var fej = "<tr><th></th>" + NAPOK.map(function (n) { return "<th>" + n + "</th>"; }).join("") + "</tr>";
+  t.innerHTML = fej;
+  SAVOK.forEach(function (s, si) {
+    var sor = document.createElement("tr");
+    sor.innerHTML = "<th>" + s + "</th>";
+    NAPOK.forEach(function (_n, ni) {
+      var c = document.createElement("td");
+      if (FOGLALT[ni + "-" + si]) { c.className = "foglalt"; c.textContent = "×"; }
+      else {
+        c.className = "szabad"; c.textContent = "szabad";
+        c.addEventListener("click", function () {
+          c.textContent = "demo 🤘";
+          setTimeout(function () { c.textContent = "szabad"; }, 1200);
+        });
+      }
+      sor.appendChild(c);
+    });
+    t.appendChild(sor);
+  });
+
+  document.querySelectorAll(".foglalo").forEach(function (g) {
+    g.addEventListener("click", function () {
+      var e = g.textContent; g.textContent = "Demo — itt nyílna a naptár"; g.disabled = true;
+      setTimeout(function () { g.textContent = e; g.disabled = false; }, 1400);
+    });
+  });
+})();
+</script>
+</body>
+</html>
