@@ -88,18 +88,27 @@
   button.doboz { cursor: pointer; }
   button.doboz:hover { border-color: var(--acc); box-shadow: 0 2px 12px rgba(29,95,191,.12); }
 
-  /* ---- beágyazott radar ---- */
-  #radarnezet { display: none; }
-  #radarnezet .fejlec {
+  /* ---- beágyazott radar + dokumentum-nézet ---- */
+  #radarnezet, #doknezet { display: none; }
+  .fejlec {
     display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;
   }
-  #vissza {
+  #vissza, #dokvissza {
     padding: 8px 16px; font: inherit; background: var(--card); color: var(--ink);
     border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
   }
-  #vissza:hover { border-color: var(--acc); color: var(--acc); }
-  #radarnezet h2 { margin: 0; font-size: 18px; }
+  #vissza:hover, #dokvissza:hover { border-color: var(--acc); color: var(--acc); }
+  .fejlec h2 { margin: 0; font-size: 18px; }
   #radarnezet a { color: var(--acc); font-size: 13px; }
+  .doklista { list-style: none; margin: 0; padding: 0; }
+  .doklista li {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px 16px; margin-bottom: 10px;
+  }
+  .doklista .dokcim { color: var(--ink); font-weight: 600; text-decoration: none; }
+  .doklista .dokcim:hover { color: var(--acc); text-decoration: underline; }
+  .doklista p { margin: 4px 0 8px; color: var(--mut); font-size: 13.5px; }
+  .doklista .dokword { color: var(--acc); font-size: 13px; }
   #radarframe {
     width: 100%; height: 78vh; border: 1px solid var(--line);
     border-radius: 12px; background: var(--card);
@@ -142,14 +151,35 @@
   </header>
 
   <div class="racs" id="racs">
-    <div class="doboz"><h2>📄 Dokumentumok</h2>
-      <p>Alapszabály, szerződés-sablonok, engedélyek — ide kerülnének a belső anyagok.</p></div>
+    <button class="doboz" id="dokumentumok" type="button"><h2>📄 Dokumentumok</h2>
+      <p>Pályázati anyagok és sablonok — kattints a listához.</p></button>
     <div class="doboz"><h2>📅 Naptár</h2>
       <p>Próbatermi beosztás, rendezvénynaptár, határidők.</p></div>
     <button class="doboz" id="palyazatok" type="button"><h2>📡 Pályázatok</h2>
       <p>A pályázatradar itt, beágyazva — kattints a megnyitáshoz.</p></button>
     <div class="doboz"><h2>💬 Faliújság</h2>
       <p>Belső hírek, teendők, ki mit vállalt.</p></div>
+  </div>
+
+  <div id="doknezet">
+    <div class="fejlec">
+      <button id="dokvissza" type="button">← Vissza</button>
+      <h2>📄 Dokumentumok</h2>
+    </div>
+    <ul class="doklista">
+      <li>
+        <a class="dokcim" href="dokumentumok/40ai.html">Pályázati követelmények és pontozás (HG-045)</a>
+        <p>Az üzlethasznosítási koncepció követelményeinek rendszerezése: kötelező tartalmi
+        elemek, pontozási szempontok, összeállítási ellenőrzőlista.</p>
+        <a class="dokword" href="dokumentumok/40AI.docx" download>Word ⬇</a>
+      </li>
+      <li>
+        <a class="dokcim" href="dokumentumok/40dryszoveg.html">Üzlethasznosítási koncepció – eredeti kiírásszöveg (HG-045)</a>
+        <p>A kiírás nyers szövege: mit kell tartalmaznia a 40 pontos szakmai
+        üzlethasznosítási koncepciónak.</p>
+        <a class="dokword" href="dokumentumok/40dryszoveg.docx" download>Word ⬇</a>
+      </li>
+    </ul>
   </div>
 
   <div id="radarnezet">
@@ -262,6 +292,16 @@
     document.getElementById("racs").style.display = "grid";
   });
 
+  // Dokumentumok kártya → dokumentum-lista
+  document.getElementById("dokumentumok").addEventListener("click", function () {
+    document.getElementById("racs").style.display = "none";
+    document.getElementById("doknezet").style.display = "block";
+  });
+  document.getElementById("dokvissza").addEventListener("click", function () {
+    document.getElementById("doknezet").style.display = "none";
+    document.getElementById("racs").style.display = "grid";
+  });
+
   document.getElementById("kilep").addEventListener("click", function () {
     bejelentkezve = null;
     valasztottJel = null;
@@ -270,6 +310,7 @@
     });
     document.getElementById("belso").style.display = "none";
     document.getElementById("radarnezet").style.display = "none";
+    document.getElementById("doknezet").style.display = "none";
     document.getElementById("racs").style.display = "grid";
     document.getElementById("kapu").style.display = "flex";
     document.getElementById("nev").value = "";
