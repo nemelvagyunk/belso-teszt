@@ -88,13 +88,20 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
 
 ## Tevékenységek + TEÁOR (könyvelővel véglegesítendő, TEÁOR'25-ben!)
 
-Mag: 5630 ital (FŐ) · 5610 éttermi · 5620 catering · 9031 műv. létesítmény ·
-9020 előadó-műv. · 9039 kiegészítő · 8230 konferencia · 9329 m.n.s. szórakoztatás.
-Bővítés: 8211 coworking (összetett irodai szolg.) · 9313 testedzés (kismama
-torna — fitnesz-keretben, nem egészségügyi!) · 5914 filmvetítés (szabadtéri
-mozi — filmenként vetítési jogdíj kell!) · kulturális oktatás (workshopok,
-gyerekprogramok). Gyerekprogram: program jelleggel, szülői jelenléttel —
-rendszeres napközbeni gyermekfelügyelet engedélyköteles, azt kerülni.
+VÉGLEGES LISTA (a megnevezés a mérvadó, a könyvelő TEÁOR'25-ben jelenti be):
+5630 Italszolgáltatás (FŐTEVÉKENYSÉG) · 5610 Éttermi vendéglátás ·
+5620 Rendezvényi étkeztetés · 9020 Előadó-művészet · 9031 Művészeti
+létesítmények és helyszínek működtetése · 9039 Előadó-műv. kiegészítő ·
+8230 Konferencia-szervezés · 8211 Összetett irodai szolg. (coworking) ·
+9329 M.n.s. szórakoztatás (bulik, gyerekprogram, próbaterem-szolg.) ·
+9609 M.n.s. személyi szolg. (esküvőszervezés) · 8551 Sport/szabadidős
+képzés · 8552 Kulturális képzés · 8559 M.n.s. egyéb oktatás ·
+8560 Oktatást kiegészítő · 9313 Testedzési szolg. (kismama torna,
+fitnesz-keretben!) · 5914 Filmvetítés (jogdíj filmenként!).
+NEM kerül fel: ingatlan-bérbeadás (albérlet-tilalom!), köznevelési kódok,
+gyermekfelügyelet (8891 — engedélyköteles). Gyerekprogram: program
+jelleggel, szülői jelenléttel. Felnőttképzési tv.: szervezett képzésnél
+bejelentés-kötelezettség lehet — hirdetés előtt könyvelővel egyeztetni.
 Elektronikus zene/bulik: zenés-táncos rendezvény bejelentés; szabadtéren
 22:00-s zajszabály.
 Esküvő (évi 4-6): helyszín+catering a meglévő kódokkal (9031+5620+5630+8230);
