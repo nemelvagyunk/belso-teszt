@@ -97,6 +97,20 @@ gyerekprogramok). Gyerekprogram: program jelleggel, szülői jelenléttel —
 rendszeres napközbeni gyermekfelügyelet engedélyköteles, azt kerülni.
 Elektronikus zene/bulik: zenés-táncos rendezvény bejelentés; szabadtéren
 22:00-s zajszabály.
+Esküvő (évi 4-6): helyszín+catering a meglévő kódokkal (9031+5620+5630+8230);
+ha szervezést is vállalunk → 9609 (m.n.s. egyéb személyi szolgáltatás).
+Prémium hétvégi csomagár (1,5-3M Ft/esküvő nagyságrend → évi 8-15M Ft).
+Naptár-prioritás: az esküvő egész napos nagyterem+udvar foglalás, fél évre
+előre — a koncertprogrammal ütközést a belső naptárnak kell kizárnia.
+Udvari zajszabály (22:00) → a buli-rész beltéri folytatása a csomag része.
+Gyerek drámatábor (nyár, napközis): kód-oldalon kulturális oktatás + 9329
+fedi (szállás nincs → szálláshely-kód sem kell). SZABÁLYOZÁS: napközis tábor
+bejelentésköteles (népegészségügy), felügyelő létszám erkölcsi
+bizonyítvánnyal, gyermek-közétkeztetési előírások a konyhára — időben
+intézni, ez a legpapírosabb program. Üzletileg: nyári völgyszezont tölt,
+zárónapi előadás az igazi színpadon (USP), és táborokra sok a pályázat —
+érdemes az EGYESÜLET alá szervezni (a kft adja a hátteret), a radar figyeli
+a kiírásokat.
 
 ## Külső (publikus) oldal — sokkal egyszerűbb, statikus is lehet
 
