@@ -106,9 +106,24 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
   a PA/keverő MINDKÉT termükben budget (EMX512SC + S115V) → egy modern,
   jó hangú PA nálunk olcsó differenciátor. Recept a prémium (D) teremhez:
   dupla csöves gitárszett (ezt veszi észre a zenekar), tartós dob EGY igazi
-  prémium cinnel (pl. kézműves ride — az az ékszer), jó PA. Házon belüli
-  árlétra: a D terem magasabb áron, saját adatból mérve a fizetési
-  hajlandóságot, aztán bevételből fokozatos fejlesztés.
+  prémium cinnel (pl. kézműves ride — az az ékszer), jó PA.
+  SZOMSZÉD GEAR-TÉRKÉPE: 1-es (4000Ft/21m²) ≈ 1,1-1,4M — PDP/Valveking/AVT,
+  logó-trükk budget szinten; 2-es (4500Ft/36m²) ≈ 1,2-1,5M — a méret +
+  színpad-optika (8x10 fal) viszi; 4-es (3700Ft/18m²) ≈ 0,8-1,1M — NULLA
+  csöves erősítő → ez a legüresebb termük (8 sáv/hét)! BIZONYÍTÉK: a
+  zenekar gear alapján választ, a gyenge terem olcsón sem kell.
+  Ár-gear görbe: ~1,2M→4000 · ~2,2M→6000 · ~3,5M→6000 — a gear hozama
+  ~2M-nél telítődik, fölötte lokáció+márka áraz. Artisfactory ára flat
+  6000 (méretfelár +500): a gear-tier keresletet terel, nem árat.
+  INDÍTÁSI TERV — KÉTTERMES MVP: 1 prémium terem (Artisfactory-szint,
+  ~2,5-3M gear, ár ~5500) + 1 standard (szomszéd-1-es szint + EGY igazi
+  csöves fej, ~1,5M, ár ~4200-4500). A gear-többlet (+1-1,5M) a +1300
+  Ft/óra felárból ~1 év alatt megtérül, HA prémium áron is megvan a
+  kihasználtság — ezt méri a teszt. Építés/hangszigetelés mind a 4 teremre
+  ELŐRE (az a lassú, visszafordíthatatlan rész), csak a gear fázisolva →
+  a 3-4. terem a tesztadat alapján hetek alatt élesíthető. Kiértékelés:
+  ha a prémium telik be először → árlépcső felfelé; ha a standard szív →
+  flat-modell. Szezon-torzítást beleszámolni (téli teszt szebb számot ad).
 - Az ablak NEM értéktényező a piacon (a prémium szereplő is ablaktalan) —
   a mi USP-nk (színpad+fellépés, pult, kódzár 0-24, backline) prémiumot indokol.
 
