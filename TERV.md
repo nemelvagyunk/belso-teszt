@@ -114,6 +114,12 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
   Az online −10% a bérlési oldalon is él (kisterem: konferencia, tréning,
   pszichodráma-csoportok; udvar) — a szerződéses nagytermi bérlés kivétel,
   ott egyedi ajánlat megy.
+  + **Próbázó-korsó (induló akció):** a próba-sáv mellé az első korsó fix
+  kedvezményes áron (pl. 600 Ft) vagy az első kör −25% — fix, "jár neked"
+  jellegű gesztus, nem százalék egy korsón (az forintban érezhetetlen).
+  Cél: a próba folyjon át pultidőbe ("máshol még hova-üljünk-be gondolkodás
+  van, nálunk lemész a pulthoz"). A POS-integrációval automatizálható:
+  a foglalórendszer tudja, ki próbált ma → a kedvezmény magától érvényesül.
 
 ## Ovis jel
 
