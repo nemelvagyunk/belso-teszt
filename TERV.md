@@ -27,6 +27,15 @@ véglegesítés → óranyilvántartás; forgalmi adatból tervezve); készletmo
 (recept-alapú fogyás-levonás, standolás: elméleti vs valós, fogyási ütemből
 előrejelzés + rendelési jelzés); POS-integráció; napi cashflow-nézet.
 
+**KONYHA lesz!** Következmények: TEÁOR-ba 5610 (éttermi) kötelező + 5620
+(catering — a terembérlős rendezvényeknél saját upsell, nem külsős kérdés);
+engedély-oldalon HACCP + élelmiszer-higiénia (NÉBIH) + melegkonyhás működési
+kör + NTAK-besorolás — ez a leglassabb engedély-vonal, időben kezdeni!
+Készletmodul bővül: alapanyagok, SZAVATOSSÁG-figyelés ("fogyóban" mellé
+"lejáróban" jelzés), konyhai receptúrák. POS: étel-tételek, konyha- és
+pultbevétel szétválasztva a cashflow-ban. Új bevételi műfaj: brunch /
+daytime + konyha kombó a nappali üres órákra.
+
 **Üzemelés közben:** jegyeladás-integráció (elővételi görbe, esemény-ROI:
 jegy + pult-többlet vs költségek; látogatószám-statisztika pályázati
 beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
