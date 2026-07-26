@@ -74,6 +74,22 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
 - Rendszeres mentés + visszaállítási terv.
 - GDPR: munkatársi személyes/béradat kezelése → adatkezelési szabályzatba felvenni.
 
+## Próbaterem-piac benchmark (2026-07, két független forrás)
+
+- **Szomszéd próbaterem** (5 terem, 3000-4500 Ft/óra, ablakos): júliusi
+  (mélyszezonos) héten 97 foglalt sáv = ~19,4 óra/terem/hét, ~21%
+  kihasználtság; foglalás szinte mind 16h után; ~3,7M Ft/terem/év szint.
+- **Artisfactory** (5 terem + stúdió, 6000 Ft/óra, PRÉMIUM, ablaktalan,
+  nem nagyobb termek): 28M Ft éves árbevétel ≈ 4700 teremóra ≈ 14-18
+  óra/terem/hét; ~5M+ Ft/terem/év.
+- Konvergencia: a piaci kereslet ~15-19 óra/terem/hét sávban stabil.
+  A PRÉMIUM kevesebb órával is többet hoz teremenként → nem alulárazni!
+  Esti listaár-célsáv: 4500-5500 Ft; a kedvezmény-rendszer (last-minute,
+  online, próbázó-korsó) lefelé dolgozik belőle. 4 teremre reális bruttó
+  éves sáv: ~12M (konzervatív) → ~19-22M (prémium pozicionálás).
+- Az ablak NEM értéktényező a piacon (a prémium szereplő is ablaktalan) —
+  a mi USP-nk (színpad+fellépés, pult, kódzár 0-24, backline) prémiumot indokol.
+
 ## KRITIKUS KORLÁT: albérletbe adás TILOS (fő bérleti szerződés)
 
 - Minden terem-"kiadás" SZOLGÁLTATÁSKÉNT fut, nem bérbeadásként: hozzáférés +
