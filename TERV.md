@@ -92,10 +92,19 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
   rendszer (last-minute, online, próbázó-korsó) a listaárból lefelé dolgozik.
   4 teremre reális bruttó éves sáv: ~12M (konzervatív) → ~19-22M (prémium).
   GEAR-TÉNYEZŐ: a prémium ár három lába lokáció + hangszerpark + márka —
-  ebből a gear az egyetlen azonnal fejleszthető (az Artisfactory ára részben
-  a drágább backline). Út: házon belüli árlétra — először EGY terem (D)
-  kap prémium backline-t magasabb áron, saját adatból mérjük a fizetési
-  hajlandóságot, aztán a bevételből fokozatos gear-fejlesztés a többiben.
+  ebből a gear az egyetlen azonnal fejleszthető. Az Artisfactory két
+  megismert terme alapján ŐK MAGUK IS ÁRLÉTRÁZNAK: 1. terem középkategória
+  jó logókkal (Stage Custom + Paiste 201 + Orange Rocker 32 + Ampeg Micro
+  VR + Joyo) ≈ 2-2,2M Ft; 2. terem prémiumabb (Natal Maple + réz pergő,
+  Istanbul Agop ride, limitált Marshall + Orange TH30 DUPLA csöves szett,
+  Warwick/Ashdown) ≈ 2,8-3,2M Ft. Tehát a piacvezető parkjai is 2-3M/terem
+  — a felzárkózás olcsó, a 6000 Ft-ot a márka+lokáció viszi. NYITOTT RÉS:
+  a PA/keverő MINDKÉT termükben budget (EMX512SC + S115V) → egy modern,
+  jó hangú PA nálunk olcsó differenciátor. Recept a prémium (D) teremhez:
+  dupla csöves gitárszett (ezt veszi észre a zenekar), tartós dob EGY igazi
+  prémium cinnel (pl. kézműves ride — az az ékszer), jó PA. Házon belüli
+  árlétra: a D terem magasabb áron, saját adatból mérve a fizetési
+  hajlandóságot, aztán bevételből fokozatos fejlesztés.
 - Az ablak NEM értéktényező a piacon (a prémium szereplő is ablaktalan) —
   a mi USP-nk (színpad+fellépés, pult, kódzár 0-24, backline) prémiumot indokol.
 
