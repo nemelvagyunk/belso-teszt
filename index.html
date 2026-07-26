@@ -115,7 +115,7 @@
   }
 
   /* ---- heti meeting szervező + saját meetingek + készletek ---- */
-  #meetingnezet, #sajatnezet, #keszletnezet { display: none; }
+  #meetingnezet, #sajatnezet, #keszletnezet, #linknezet { display: none; }
   table.keszlet td, table.keszlet th { padding: 7px 8px; font-size: 13.5px; }
   table.keszlet td:first-child { text-align: left; }
   .fogyoban { color: #a01d1d; font-weight: 700; }
@@ -213,6 +213,9 @@
     <button class="doboz" id="keszletek" type="button" style="grid-column: span 2; display: none;">
       <h2>📦 Készletek</h2>
       <p>Raktár- és pultkészlet áttekintés — csak a tulajdonos és az üzletvezető látja.</p></button>
+    <button class="doboz" id="linkek" type="button" style="grid-column: span 2;">
+      <h2>🔗 Hasznos linkek</h2>
+      <p>Zenei-kulturális linkgyűjtemény — sajtó, inspiráció, kapcsolatok.</p></button>
   </div>
 
   <div id="doknezet">
@@ -234,6 +237,14 @@
         <a class="dokword" href="dokumentumok/40dryszoveg.docx" download>Word ⬇</a>
       </li>
     </ul>
+  </div>
+
+  <div id="linknezet">
+    <div class="fejlec">
+      <button id="linkvissza" type="button">← Vissza</button>
+      <h2>🔗 Hasznos linkek</h2>
+    </div>
+    <ul class="doklista" id="linklista"></ul>
   </div>
 
   <div id="keszletnezet">
@@ -604,6 +615,40 @@
     document.getElementById("racs").style.display = "grid";
   });
 
+  // ---- Hasznos linkek: bővítéshez csak ezt a listát told meg ----
+  var LINKEK = [
+    { url: "https://telex.hu/after", cim: "Telex After",
+      leiras: "A Telex zenei-kulturális rovata — koncertek, lemezek, szcéna-hírek." },
+    { url: "https://recorder.blog.hu/", cim: "Recorder",
+      leiras: "Magyar zenei magazin — interjúk, kritikák, programajánlók." },
+    { url: "https://www.facebook.com/NagyErvinoldala", cim: "Nagy Ervin (Facebook)",
+      leiras: "Facebook-oldal." }
+  ];
+
+  document.getElementById("linkek").addEventListener("click", function () {
+    var lista = document.getElementById("linklista");
+    lista.innerHTML = "";
+    LINKEK.forEach(function (l) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.className = "dokcim"; a.href = l.url; a.target = "_blank"; a.rel = "noopener";
+      a.textContent = l.cim;
+      var p = document.createElement("p");
+      p.textContent = l.leiras;
+      var kis = document.createElement("a");
+      kis.className = "dokword"; kis.href = l.url; kis.target = "_blank"; kis.rel = "noopener";
+      kis.textContent = l.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+      li.appendChild(a); li.appendChild(p); li.appendChild(kis);
+      lista.appendChild(li);
+    });
+    document.getElementById("racs").style.display = "none";
+    document.getElementById("linknezet").style.display = "block";
+  });
+  document.getElementById("linkvissza").addEventListener("click", function () {
+    document.getElementById("linknezet").style.display = "none";
+    document.getElementById("racs").style.display = "grid";
+  });
+
   document.getElementById("kilep").addEventListener("click", function () {
     bejelentkezve = null;
     valasztottJel = null;
@@ -617,6 +662,7 @@
     document.getElementById("sajatnezet").style.display = "none";
     document.getElementById("keszletnezet").style.display = "none";
     document.getElementById("keszletek").style.display = "none";
+    document.getElementById("linknezet").style.display = "none";
     document.getElementById("racs").style.display = "grid";
     document.getElementById("kapu").style.display = "flex";
     document.getElementById("nev").value = "";
