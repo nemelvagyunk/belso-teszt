@@ -84,9 +84,18 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
   óra/terem/hét; ~5M+ Ft/terem/év.
 - Konvergencia: a piaci kereslet ~15-19 óra/terem/hét sávban stabil.
   A PRÉMIUM kevesebb órával is többet hoz teremenként → nem alulárazni!
-  Esti listaár-célsáv: 4500-5500 Ft; a kedvezmény-rendszer (last-minute,
-  online, próbázó-korsó) lefelé dolgozik belőle. 4 teremre reális bruttó
-  éves sáv: ~12M (konzervatív) → ~19-22M (prémium pozicionálás).
+  LOKÁCIÓ-KALIBRÁCIÓ: az Artisfactory prémium lokáció, a miénk "négyes" —
+  ezért az árhorgony NEM ő, hanem a közeli szomszéd (azonos vonzáskörzet!):
+  szomszéd-ár +10-15% USP-felár = esti listaár 4500-5000 induláskor
+  (a demó-árlista pont ez). Az 5500-6000-es Artisfactory-szint felzárkózási
+  cél telített naptár + felépült márka után, nem induló ár. A kedvezmény-
+  rendszer (last-minute, online, próbázó-korsó) a listaárból lefelé dolgozik.
+  4 teremre reális bruttó éves sáv: ~12M (konzervatív) → ~19-22M (prémium).
+  GEAR-TÉNYEZŐ: a prémium ár három lába lokáció + hangszerpark + márka —
+  ebből a gear az egyetlen azonnal fejleszthető (az Artisfactory ára részben
+  a drágább backline). Út: házon belüli árlétra — először EGY terem (D)
+  kap prémium backline-t magasabb áron, saját adatból mérjük a fizetési
+  hajlandóságot, aztán a bevételből fokozatos gear-fejlesztés a többiben.
 - Az ablak NEM értéktényező a piacon (a prémium szereplő is ablaktalan) —
   a mi USP-nk (színpad+fellépés, pult, kódzár 0-24, backline) prémiumot indokol.
 
