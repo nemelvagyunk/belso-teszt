@@ -74,6 +74,30 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
 - Rendszeres mentés + visszaállítási terv.
 - GDPR: munkatársi személyes/béradat kezelése → adatkezelési szabályzatba felvenni.
 
+## KRITIKUS KORLÁT: albérletbe adás TILOS (fő bérleti szerződés)
+
+- Minden terem-"kiadás" SZOLGÁLTATÁSKÉNT fut, nem bérbeadásként: hozzáférés +
+  szolgáltatás (felügyelet, technika, backline, takarítás, kódzár, házirend),
+  a birtok nálunk marad. Ingatlan-bérbeadás TEÁOR-t (6820-féle) fel se venni.
+- Szerződések neve/tartalma: "teremhasználati / szolgáltatási szerződés",
+  SOHA nem "bérleti". Az éles weboldalakon is: "teremhasználat / foglalás",
+  nem "terembérlés" (a /berles/ demó átnevezendő élesítéskor!).
+- A fő bérleti szerződés pontos tilalmi klauzuláját + a szolgáltatás-modellt
+  ügyvéddel átnézetni. Az óradíjas, kódzáras, backline-os modell a
+  szolgáltatás-jelleget erősíti — ez jogilag is jól áll.
+
+## Tevékenységek + TEÁOR (könyvelővel véglegesítendő, TEÁOR'25-ben!)
+
+Mag: 5630 ital (FŐ) · 5610 éttermi · 5620 catering · 9031 műv. létesítmény ·
+9020 előadó-műv. · 9039 kiegészítő · 8230 konferencia · 9329 m.n.s. szórakoztatás.
+Bővítés: 8211 coworking (összetett irodai szolg.) · 9313 testedzés (kismama
+torna — fitnesz-keretben, nem egészségügyi!) · 5914 filmvetítés (szabadtéri
+mozi — filmenként vetítési jogdíj kell!) · kulturális oktatás (workshopok,
+gyerekprogramok). Gyerekprogram: program jelleggel, szülői jelenléttel —
+rendszeres napközbeni gyermekfelügyelet engedélyköteles, azt kerülni.
+Elektronikus zene/bulik: zenés-táncos rendezvény bejelentés; szabadtéren
+22:00-s zajszabály.
+
 ## Külső (publikus) oldal — sokkal egyszerűbb, statikus is lehet
 
 - **Bemutatkozó oldal** + **megközelítés** (térkép, tömegközlekedés). Mellé:
