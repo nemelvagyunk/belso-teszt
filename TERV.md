@@ -172,6 +172,31 @@ zárónapi előadás az igazi színpadon (USP), és táborokra sok a pályázat 
 érdemes az EGYESÜLET alá szervezni (a kft adja a hátteret), a radar figyeli
 a kiírásokat.
 
+## Marketing-terv (csatorna → funkció)
+
+- **Google Business Profile (INGYEN, legfontosabb):** "próbaterem Budapest /
+  8. kerület" keresők = foglalási szándék. Kitöltött profil, gear-fotók
+  (a zenekar a cuccot nézi!), és VÉLEMÉNYEK — az első 20-30 zenekartól
+  Google-értékelést kérni (akár próbázó-korsóért).
+- **Google Search hirdetés (KEZDŐ CSATORNA — Attila ezzel indít):** kis
+  büdzsé (napi 1-2E Ft) a magas szándékú kulcsszavakra; alacsony verseny,
+  magas konverzió. A "vadász" csatorna.
+- **FB: csoportok, nem hirdetés.** Zenészbörze, hangszeres és zenekartárs-
+  kereső csoportok, kerületi csoportok — organikus jelenlét, bemutatkozó
+  gear-fotókkal, last-minute sáv-akciók bedobása. FB/Insta HIRDETÉS csak
+  eseményekre (koncert, daytime buli): geo 5km + zenei érdeklődés.
+- **Instagram = márkaépítés:** a ház élete, pince-hangulat, ovis jelek,
+  "pincéből a színpadra" sztorik. Beépített flywheel: minden fellépő
+  próbatermes zenekar posztol/tagel — a Bemutatkozó Est tartalomgyár,
+  a zenekarok hozzák a saját közönségüket.
+- **Filléres helyi:** plakát/szórólap hangszerboltokban + zeneiskoláknál;
+  lábankénti vadászterületek: gyerekprogram + kismama torna → kerületi
+  baba-mama FB-csoportok (aranybánya); esküvő → Google + esküvői portálok;
+  coworking → Google + kerületi csoportok.
+- Büdzsé-recept: 0 Ft-ból GBP + csoportok + zenekar-flywheel; havi 30-50E:
+  Google Search (próbaterem) + esemény-hirdetések. Nagy márkakampány nem
+  kell — a közösség a médium.
+
 ## Külső (publikus) oldal — sokkal egyszerűbb, statikus is lehet
 
 - **Bemutatkozó oldal** + **megközelítés** (térkép, tömegközlekedés). Mellé:
