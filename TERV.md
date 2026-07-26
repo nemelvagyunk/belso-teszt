@@ -97,7 +97,11 @@ beszámolókhoz); terem-/próbaterem-foglalás; faliújság + teendők.
   jó logókkal (Stage Custom + Paiste 201 + Orange Rocker 32 + Ampeg Micro
   VR + Joyo) ≈ 2-2,2M Ft; 2. terem prémiumabb (Natal Maple + réz pergő,
   Istanbul Agop ride, limitált Marshall + Orange TH30 DUPLA csöves szett,
-  Warwick/Ashdown) ≈ 2,8-3,2M Ft. Tehát a piacvezető parkjai is 2-3M/terem
+  Warwick/Ashdown) ≈ 2,8-3,2M Ft; 3. terem a csúcs (DW Design szett + DW
+  Collector's pergő ékszer-darab!, ENGL + Orange Dual Terror dupla csöves,
+  Orange OB-1 + magyar Imperator láda, Zildjian/Anatolian) ≈ 3-3,7M Ft.
+  Mintázat: emelkedő tier-ek, termenként EGY ékszer-darab (ami miatt pont
+  azt foglalod), felső termekben dupla gitárszett. Piacvezető parkjai 2-3,5M/terem
   — a felzárkózás olcsó, a 6000 Ft-ot a márka+lokáció viszi. NYITOTT RÉS:
   a PA/keverő MINDKÉT termükben budget (EMX512SC + S115V) → egy modern,
   jó hangú PA nálunk olcsó differenciátor. Recept a prémium (D) teremhez:
