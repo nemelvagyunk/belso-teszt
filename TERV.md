@@ -172,6 +172,14 @@ zárónapi előadás az igazi színpadon (USP), és táborokra sok a pályázat 
 érdemes az EGYESÜLET alá szervezni (a kft adja a hátteret), a radar figyeli
 a kiírásokat.
 
+Jóga (hétköznap napközben): a nappali üres sávok megtöltésére — reggeli /
+délelőtti / ebédszüneti órák, kisterem vagy nagyterem. Konstrukció:
+szolgáltatásként fut (jegy/bérlet nálunk, az oktató óradíjas vagy
+alvállalkozó) — NEM terembérlet, albérlet-tilalom! Kód-oldalon a 8551 +
+9313 már fedi, új TEÁOR nem kell. Szinergia: kismama torna ugyanabban a
+napközbeni sávban, gyerekprogramos szülők mint célcsoport, online -10%
+ide is érvényes.
+
 ## Marketing-terv (csatorna → funkció)
 
 - **Google Business Profile (INGYEN, legfontosabb):** "próbaterem Budapest /
