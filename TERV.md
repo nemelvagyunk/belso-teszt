@@ -180,6 +180,29 @@ alvállalkozó) — NEM terembérlet, albérlet-tilalom! Kód-oldalon a 8551 +
 napközbeni sávban, gyerekprogramos szülők mint célcsoport, online -10%
 ide is érvényes.
 
+Daytime buli — KÉTSZÍNPADOS NYÁRI FORMÁTUM (a benti terek nyáron is
+dolgoznak!): kert ~350 fő (3 m ajtó = 300 fő volt a számítás, 3,5 m
+arányosan ~350; tervezőtől megkérdezni: sávos módszernél a 3,6 m már
++1 teljes kiürítési sáv!) + bent 200 fős stage-terem + 50 fő vendégtér.
+FÁZISOS működés: délután csak a kert megy (a bent ilyenkor hűsölő/chill
+zóna + második pult, nem program); naplementétől bekapcsol a belső
+stage; 22:00 udvari zajstop → minden beköltözik = BEÉPÍTETT AFTERPARTY.
+Kánikula-üzemmód: hőségnapokon a hűvös-sötét belső délután is húz
+("a leghidegebb klub a városban"). MŰFAJI KONTRASZT a két színpad közt:
+kert = élő zene, bent = DJ/elektronikus — szélesíti a közönséget, olcsó
+booking (DJ vs zenekar), és a hangátszűrődést is megoldja; de egy
+törzsközönségnek szóljon, átjárással. Realista nappali létszám: bent
+50-100 fő → a nappali klub KISEBB térben / lehatárolva menjen
+(zsúfoltság-érzés!), a nagyterem este nyílik. AFTER KÜLÖN JEGY: limit =
+belső kapacitás (~250), karszalag-szín jelöli; kombójegy (daytime+after)
+elővételben online -10%-kal; helyszíni upgrade estig, amíg a keret tart.
+Jog: beltéri zenés-táncos engedély 300 fő BEFOGADÓKÉPESSÉG felett
+(kiürítési számítás szerinti!), szabadtéri 1000 fő felett — kialakításkor
+jegyző/katasztrófavédelem egyeztetés, rendszeres engedély megfontolandó.
+Kerti nagy pult + belső pult külön kasszaként a POS-ban → óránkénti
+adatból látszik a tömegvándorlás. A 3,5 m-es ajtó extra hozadéka:
+backline-rakodás + esküvő-logisztika.
+
 ## Marketing-terv (csatorna → funkció)
 
 - **Google Business Profile (INGYEN, legfontosabb):** "próbaterem Budapest /
