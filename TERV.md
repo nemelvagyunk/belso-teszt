@@ -203,6 +203,28 @@ Kerti nagy pult + belső pult külön kasszaként a POS-ban → óránkénti
 adatból látszik a tömegvándorlás. A 3,5 m-es ajtó extra hozadéka:
 backline-rakodás + esküvő-logisztika.
 
+BŐVÍTÉSI OPCIÓK (státusz: ötlet — előbb kideríteni, ki használja mire;
+tárgyalás csak utána, és csak ha a saját ház kihasználtsága indokolja):
+1) KERT VÉGI ÉPÜLET (nagy, piros tetős) — második koncerthelyszín-jelölt.
+   A ~40 000 m²-es, ~200 tulajdonosú osztatlan közös tulajdonú telepen áll
+   → a tulajdoni lap NEM mondja meg, melyik épület kié! Kiderítés: telep
+   portása/gondnoka + szomszéd cégek (10 perc lábmunka), ill. használati
+   megosztási megállapodás. Ha csak raktárnak használják: régi raktár
+   piaci ára ~500-1500 Ft/m²/hó → 50-100% ráígéréssel is olcsón jön ki;
+   az ajánlatba a súrlódást is beárazni (költöztetés-segítség v. megosztott
+   használat). VALÓDI költség: engedélyek (kiürítés, tűzvédelem, WC,
+   rendeltetés) — ajánlat ELŐTT tűzvédelmi szakemberrel megnézetni.
+   Előny: ipartelep éjjel üres = zajpanasz-mentes; bejárás a saját kerten át.
+2) KIS SZÜRKE ÉPÜLET ugyanott — raktár (backline, fesztiválcucc),
+   backstage/öltöző a kerti színpadhoz, jegypénztár-pont. Kis bérleti díj,
+   nagy hasznosság; a portánál egyszerre rákérdezni a naggyal.
+3) SZOMSZÉD PINCE — a miénkkel EGYBENYÍLIK → próbaterem-bővítés utcai
+   bejárat és falbontás nélkül, a kódzáras beléptetés kiterjeszthető.
+   Trigger: ha a saját 4 terem esti kihasználtsága tartósan 80%+ → akkor
+   megkérdezni, bérbe adnák-e. A bérleti díj a kisebbik tétel — a
+   hangszigetelés + szellőzés terménként a valódi beruházás, csak
+   bizonyított kereslet mellett éri meg.
+
 ## Marketing-terv (csatorna → funkció)
 
 - **Google Business Profile (INGYEN, legfontosabb):** "próbaterem Budapest /
